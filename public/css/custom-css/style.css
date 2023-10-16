@@ -1,0 +1,524 @@
+[class*=sidebar-dark-] .sidebar a {
+    color: #565656 !important;
+}
+
+[class*=sidebar-dark-] .sidebar a:hover {
+    color: #090909 !important;
+    background-color: #fde4ad !important;
+}
+
+
+.custom-input {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+#nationality {
+    font-size: 17px !important;
+    line-height: 1.0rem !important;
+    vertical-align: top;
+    margin-bottom: 0.5rem;
+    font-family: system-ui;
+}
+
+#traveling {
+    font-size: 17px !important;
+    line-height: 1.0rem !important;
+    vertical-align: top;
+    margin-bottom: 0.5rem;
+    font-family: system-ui;
+}
+
+#startdate {
+    font-size: 15px !important;
+    /* line-height: 1.0rem; */
+    vertical-align: top;
+    margin-bottom: 0.5rem;
+    font-family: system-ui;
+}
+
+#enddate {
+    font-size: 17px !important;
+    /* line-height: 1.0rem; */
+    vertical-align: top;
+    margin-bottom: 0.5rem;
+    font-family: system-ui;
+}
+
+.switch-field {
+    display: flex;
+    margin-bottom: 36px;
+    overflow: hidden;
+    font-family: system-ui;
+}
+
+.switch-field input {
+    position: absolute !important;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    width: 1px;
+    font-family: system-ui;
+    border: 0;
+    margin-left: 3%;
+    overflow: hidden;
+}
+
+.switch-field label {
+    background-color: #ffffff;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    font-weight: 100%;
+    line-height: 1;
+    text-align: center;
+    padding: 8px 16px;
+    margin-right: -1px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+    transition: all 0.1s ease-in-out;
+}
+
+.switch-field label:hover {
+    cursor: pointer;
+}
+
+.switch-field input:checked+label {
+    background-color: #039afe;
+    color: #ffffff;
+    box-shadow: none;
+    font-size: medium;
+}
+
+.switch-field label:first-of-type {
+    border-radius: 4px 0 0 4px;
+}
+
+#coupon-container_document {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+}
+
+.switch-field label:last-of-type {
+    border-radius: 0 4px 4px 0;
+}
+
+.card .card-description {
+    margin-bottom: 0.875rem;
+    font-weight: 700;
+    color: #393939;
+    font-family: system-ui;
+}
+
+.tabset>input[type="radio"] {
+    position: absolute;
+    left: -200vw;
+}
+
+.tabset .tab-panel {
+    display: none;
+}
+
+.tabset>input:first-child:checked~.tab-panels>.tab-panel:first-child,
+.tabset>input:nth-child(3):checked~.tab-panels>.tab-panel:nth-child(2),
+.tabset>input:nth-child(5):checked~.tab-panels>.tab-panel:nth-child(3),
+.tabset>input:nth-child(7):checked~.tab-panels>.tab-panel:nth-child(4),
+.tabset>input:nth-child(9):checked~.tab-panels>.tab-panel:nth-child(5),
+.tabset>input:nth-child(11):checked~.tab-panels>.tab-panel:nth-child(6) {
+    display: block;
+}
+
+.tabset>label {
+    position: relative;
+    display: inline-block;
+    padding: 15px 15px 25px;
+    border: 1px solid transparent;
+    border-bottom: 0;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.tabset>label::after {
+    content: "";
+    position: absolute;
+    left: 15px;
+    bottom: 10px;
+    width: 22px;
+    height: 4px;
+    background: #8d8d8d;
+}
+
+input:focus-visible+label {
+    outline: 2px solid rgba(0, 102, 204, 1);
+    border-radius: 3px;
+}
+
+.tabset>label:hover,
+.tabset>input:focus+label,
+.tabset>input:checked+label {
+    color: #06c;
+}
+
+.tabset>label:hover::after,
+.tabset>input:focus+label::after,
+.tabset>input:checked+label::after {
+    background: #06c;
+}
+
+.tabset>input:checked+label {
+    border-color: #ccc;
+    border-bottom: 1px solid #fff;
+    margin-bottom: -1px;
+}
+
+.tab-panel {
+    padding: 30px 0;
+    border-top: 1px solid #ccc;
+}
+
+.tabset {
+    width: 100%;
+}
+
+.bi::before,
+[class^="bi-"]::before,
+[class*=" bi-"]::before {
+    display: inline-block;
+    font-family: bootstrap-icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    color: black;
+    vertical-align: -0.125em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+.coupon-container {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    float: left;
+
+}
+
+.coupon {
+    /* background-color: #f5f5f5;
+  border: 1px solid #ccc; */
+    border-radius: 5px;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.coupon-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.coupon-description {
+    margin-bottom: 5px;
+    margin-top: 5%;
+}
+
+
+.custom-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.custom-card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.custom-card-text {
+    /* margin-bottom: 5px; */
+    margin-top: 5px;
+}
+
+.custom-card-button {
+    background-color: #f5a720;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+
+.coupon-container {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.coupon {
+    /* background-color: #f5f5f5;
+  border: 1px solid #ccc; */
+    border-radius: 5px;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.coupon-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.coupon-description {
+    margin-bottom: 5px;
+}
+
+
+
+/* Add your custom styles to the input field */
+.custom-date-picker {
+    /* Add your custom styling here */
+    position: relative;
+}
+
+/* Style the date picker dropdown */
+.date-picker-dropdown {
+    position: absolute;
+    z-index: 1;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    /* Add your custom styling for the dropdown */
+    display: none;
+}
+
+
+/* Add your custom styles to the input field */
+.custom-date-picker {
+    /* Add your custom styling here */
+    position: relative;
+}
+
+/* Style the date picker dropdown */
+.date-picker-dropdown {
+    position: absolute;
+    z-index: 1;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    /* Add your custom styling for the dropdown */
+    display: none;
+}
+
+
+
+.dropzone {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+.dropzone:hover {
+    background-color: #f8f9fa;
+}
+
+/* Hide the default file input */
+#fileInput {
+    display: none;
+}
+
+
+
+/* Styling for the date picker dropdown */
+.date-picker-dropdown {
+    display: none;
+    /* Hide the dropdown by default */
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* Styling for the date picker input field */
+.form-control {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Additional styling for the date picker dropdown */
+/* Customize these styles as per your preference */
+.date-picker-dropdown input[type="date"] {
+    width: 150px;
+    padding: 5px;
+}
+
+
+
+.ticket {
+    border: 1px solid #c7c7c7;
+    padding: 10px;
+    padding-bottom: 1px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0px -1px 15px 4px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+    height: fit-content;
+    /* display: flex; */
+    justify-content: space-between;
+    /* Aligns items to both ends */
+}
+
+.file-input {
+    display: flex;
+    align-items: center;
+    /* Vertically center align the input elements */
+}
+
+.file-input input {
+    margin-left: 10px;
+    /* Add some spacing between the label and the input */
+}
+
+
+.custom-card-text {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.form-label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    width: 100%;
+    /* padding: 10px; */
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Optional: If you want to style the file input button */
+.form-control[type="file"] {
+    cursor: pointer;
+    background-color: #fff;
+    color: #555;
+}
+
+.form-control[type="file"]::-webkit-file-upload-button {
+    cursor: pointer;
+    padding: 8px 12px;
+    border: 2px solid #555;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+}
+
+.form-control[type="file"]::before {
+    content: "Browse";
+    /* Change this to your desired button text */
+}
+
+.form-control[type="file"]:hover::before {
+    border-color: #333;
+}
+
+.form-control[type="file"]:focus::before {
+    outline: none;
+    border-color: #555;
+}
+
+/* Optional: If you want to style the multiple file selection text */
+.form-control[type="file"]::after {
+    content: "Choose files";
+    /* Change this to your desired text */
+    font-size: 14px;
+    display: block;
+    margin-top: 5px;
+}
+
+/* Optional: If you want to style the file names after selection */
+.form-control[type="file"]:not(:focus)+.selected-files::before {
+    content: attr(data-placeholder);
+    font-size: 14px;
+    color: #555;
+}
+
+/* Optional: If you want to show the selected file names */
+.form-control[type="file"]:focus+.selected-files::before {
+    content: attr(data-content);
+    font-size: 14px;
+    color: #333;
+}
+
+.required-field {
+    color: red;
+}
+
+
+
+.image-preview {
+    display: inline-block;
+    margin: 10px;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.image-preview img {
+    max-width: 187px;
+    max-height: 132px;
+}
+
+.delete-button {
+    display: block;
+    margin-top: 5px;
+    background-color: #ff5a5a;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.select2-container .select2-selection--single {
+    height: 38px !important;
+}
+
+.select2-container--default .select2-selection--single {
+    border: 1px solid #ccc !important;
+    border-radius: 5px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 26px;
+    position: absolute;
+    top: 4px;
+    right: 1px;
+    width: 20px;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 26px;
+  position: absolute;
+  top: 5px !important;
+  right: 1px;
+  width: 20px;
+}
