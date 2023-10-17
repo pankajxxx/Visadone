@@ -11,18 +11,17 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="/public/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->
 
     <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <link rel="stylesheet" href="/plugins/jqvmap/jqvmap.min.css">
-    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker.css">
-    <link rel="stylesheet" href="/plugins/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/jqvmap/jqvmap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
@@ -224,12 +223,12 @@
                                                     <div class="form-group">
                                                         <label for="countrySelect">Document Type</label>
                                                         <select class="form-control" name="document_type"
-                                                            id="nationality">
+                                                            id="document_type" onchange="updateInputField()">
                                                             <option value="">Select Document</option>
                                                             @foreach ($document as $option)
-                                                                <option name="nationality"
-                                                                    value="{{ $option->document_name }}">
-                                                                    {{ $option->document_name }}</option>
+                                                                <option value="{{ $option->document_name }}">
+                                                                    {{ $option->document_type }}
+                                                                </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -242,6 +241,24 @@
                                                             id="inlineFormInputName2" placeholder="Document Name">
                                                     </div>
                                                 </div>
+                                                <script>
+                                                    function updateInputField() {
+                                                        var dropdown = document.getElementById('document_type');
+                                                        var selectedOption = dropdown.options[dropdown.selectedIndex];
+                                                        var inputField = document.getElementById('inlineFormInputName2');
+
+                                                        if (selectedOption.value) {
+                                                            inputField.value = selectedOption.value;
+                                                        } else {
+                                                            inputField.value = ''; // Clear the input field if "Select Document" is chosen
+                                                        }
+                                                    }
+                                                </script>
+
+
+
+
+
 
                                             </div>
 
@@ -316,14 +333,195 @@
                                             <div class="col-md-6">
                                                 <div class="switch-field">
                                                     <input type="radio" id="radio-one-3"
-                                                        name="document_requiredments" value="always" checked="">
+                                                        name="document_requirements" value="always"
+                                                        onchange="show_block()">
                                                     <label for="radio-one-3">Always</label>
                                                     <input type="radio" id="radio-two-3"
-                                                        name="document_requiredments" value="conditionally">
+                                                        name="document_requirements" value="conditionally"
+                                                        checked="" onchange="show_block()">
                                                     <label for="radio-two-3">Conditionally</label>
                                                 </div>
                                             </div>
+                                            {{-- <div id="conditional-fields" style="display: none;">
+                                                <h1>Check one</h1>
+                                            </div> --}}
+                                            <script>
+                                                function show_block() {
+                                                    var condition = document.getElementById('radio-two-3'); // Check the "Conditionally" radio button
+
+                                                    if (condition.checked) {
+                                                        document.getElementById('conditional-fields').style.display = 'block'; // Show the conditional block
+                                                    } else {
+                                                        document.getElementById('conditional-fields').style.display = 'none'; // Hide the conditional block
+                                                    }
+                                                }
+                                            </script>
+
+
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+
+
+
+
+                        <div class="row" id="conditional-fields">
+                            <div class="col-12 grid-margin">
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <div class="form-sample">
+                                            <div class="row">
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="stateSelect">Conditional Description</label>
+                                                        <input type="text" name="condition_description"
+                                                            class="form-control mb-2 mr-sm-2"
+                                                            id="inlineFormInputName2"
+                                                            placeholder="Conditional Description">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-sample">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <select name="condition_Key" class="form-control mb-2 mr-sm-2"
+                                                            id="keySelect">
+                                                            <option value="Operator">Select Key</option>
+                                                            <option value="Age">Age</option>
+                                                            <option value="Gender">Gender</option>
+                                                            <option value="Marital Status">Marital Status</option>
+                                                            <option value="Observation Page">Observation Page</option>
+                                                            <option value="Spouse Name on Passport">Spouse Name on
+                                                                Passport</option>
+                                                            <!-- Add more options here if needed -->
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <select name="condition_operator"
+                                                            class="form-control mb-2 mr-sm-2" id="operatorSelect">
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <select name="condition_value"
+                                                            class="form-control mb-2 mr-sm-2" id="descriptionInput">
+                                                            <option value="">Select Value</option>
+                                                            <!-- Age options will be populated dynamically here -->
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <script>
+                                            // Get references to the select elements and input field
+                                            const keySelect = document.getElementById('keySelect');
+                                            const operatorSelect = document.getElementById('operatorSelect');
+                                            const descriptionInput = document.getElementById('descriptionInput');
+
+                                            // Event listener to update the input field based on the selected key
+                                            keySelect.addEventListener('change', function() {
+                                                const selectedKey = keySelect.value;
+                                                // You can implement logic here to update the input field based on the selected key
+                                                switch (selectedKey) {
+                                                    case 'Age':
+                                                        // Update the input field as needed for the 'Age' key
+                                                        descriptionInput.innerHTML = ''; // Clear any existing options
+                                                        for (let age = 1; age <= 70; age++) {
+                                                            descriptionInput.innerHTML += `<option value="${age}">${age}</option>`;
+
+                                                        }
+                                                        operatorSelect.innerHTML = ``;
+                                                        operatorSelect.innerHTML+= `<option value="<"><</option>`;
+                                                        operatorSelect.innerHTML+= `<option value=">">></option>`;
+                                                        operatorSelect.innerHTML+= `<option value="<="><=</option>`;
+                                                        operatorSelect.innerHTML+= `<option value=">">>=</option>`;
+                                                        // descriptionInput.placeholder = 'Enter Age';
+                                                        break;
+                                                    case 'Gender':
+                                                        descriptionInput.innerHTML = ''; // Clear any existing options
+                                                        descriptionInput.innerHTML += '<option value="Male">Male</option>';
+                                                        descriptionInput.innerHTML += '<option value="Female">Female</option>';
+                                                        descriptionInput.innerHTML += '<option value="Other">Other</option>';
+
+                                                        operatorSelect.innerHTML = ``;
+                                                        operatorSelect.innerHTML+= `<option value="=">=</option>`;
+                                                        operatorSelect.innerHTML+= `<option value="!=">!=</option>`;
+
+                                                        break;
+                                                    case 'Marital Status':
+                                                        descriptionInput.innerHTML = ''; // Clear any existing options
+                                                        descriptionInput.innerHTML += '<option value="SINGLE">SINGLE</option>';
+                                                        descriptionInput.innerHTML += '<option value="MARRIED">MARRIED</option>';
+                                                        descriptionInput.innerHTML += '<option value="DIVORCED">DIVORCED</option>';
+                                                        descriptionInput.innerHTML += '<option value="WIDOW">WIDOW</option>';
+                                                        descriptionInput.innerHTML += '<option value="DECEASED">DECEASED</option>';
+                                                        descriptionInput.innerHTML += '<option value="UNSPECIFIC">UNSPECIFIC</option>';
+                                                        descriptionInput.innerHTML += '<option value="CHILD">CHILD</option>';
+
+
+                                                        operatorSelect.innerHTML = ``;
+                                                        operatorSelect.innerHTML+= `<option value="=">=</option>`;
+                                                        operatorSelect.innerHTML+= `<option value="!=">!=</option>`;
+                                                        break;
+                                                    case 'Observation Page':
+                                                        descriptionInput.innerHTML = ''; // Clear any existing options
+                                                        descriptionInput.innerHTML += '<option value="Exits">Exits</option>';
+                                                        descriptionInput.innerHTML += '<option value="Blank">Blank</option>';
+
+                                                        operatorSelect.innerHTML = ``;
+                                                        operatorSelect.innerHTML+= `<option value="=">=</option>`;
+
+                                                        break;
+                                                    case 'Spouse Name on Passport':
+                                                        descriptionInput.innerHTML = ''; // Clear any existing options
+                                                        descriptionInput.innerHTML += '<option value="Endorsed">Endorsed</option>';
+
+                                                        operatorSelect.innerHTML = ``;
+                                                        operatorSelect.innerHTML+= `<option value="is">is</option>`;
+                                                        operatorSelect.innerHTML+= `<option value="is not">is not</option>`;
+                                                        break;
+
+                                                        // Add more cases for other keys as needed
+                                                    default:
+                                                        // Reset the input field for the default case
+                                                        descriptionInput.placeholder = 'Value';
+                                                }
+                                            });
+                                        </script>
+
+                                        {{-- <div class="form-sample">
+                                            <div class="row">
+
+                                                <div class="col-md-1">
+                                                    <div class="form-group">
+                                                        <a class="float-left btn btn-success"
+                                                      >Add Rule</a>
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <div class="form-group">
+                                                        <a class="float-left btn btn-success"
+                                                        >Add Block</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>

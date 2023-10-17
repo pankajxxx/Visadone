@@ -137,12 +137,13 @@
                                                         class="btn btn-primary mb-2"
                                                         onclick="getDocument()"></button>&nbsp;
                                                     <input type="submit" value="Update Document"
-                                                        class="btn btn-primary mb-2" onclick=""></button>
+                                                        class="btn btn-primary mb-2" onclick="update_Offer()"></button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
+                                    <input type="hidden" id="hiddenField" name="myHiddenField" value="">
 
                                     <div class="row">
                                         <div class="col-md-4">
@@ -166,7 +167,9 @@
                                                             <tr class="cell-1" data-toggle="collapse"
                                                                 data-target="#demo">
                                                                 <td><input type="checkbox" class="chh"
-                                                                        value="{{ $country_name->country_name }}"></td>
+                                                                        value="{{ $country_name->country_name }}"
+                                                                        data-offer-id="">
+
                                                                 <td class="text-center">
                                                                     {{ $country_name->country_name }}
                                                                     <hr><b>
@@ -272,8 +275,8 @@
 
             var offer_id = document.getElementById('offer_put').value;
 
-            // console.log(offer_id);
-            // console.log(nation);
+            console.log(offer_id);
+            console.log(nation);
 
             var data = {
                 offer_id: offer_id,
@@ -301,7 +304,93 @@
         }
     </script>
 
+    <script>
+        function update_Offer() {
 
+            var checkedValues = [];
+
+            // Iterate through checked checkboxes in the #countryTable
+            var checkboxes = document.querySelectorAll('#countryTable input[type="checkbox"]:checked');
+
+            checkboxes.forEach(function(checkbox) {
+                // Get the value of the checkbox
+                var checkboxValue = checkbox.value;
+
+                // Find the associated additionalData element by ID
+                var additionalDataElement = document.getElementById('additionalData_' + checkboxValue);
+
+                // Get the value of the additionalData element
+                var additionalDataValue = additionalDataElement.innerHTML;
+
+                // Initialize a variable to store the ID value
+                var idValue = '';
+
+                // Split the additionalDataValue by '<br>' to get an array of parts
+                var parts = additionalDataValue.split('<br>');
+
+                // Loop through the parts to find the one containing 'ID:'
+                for (var i = 0; i < parts.length; i++) {
+                    var part = parts[i];
+                    if (part.includes('ID:')) {
+                        // Extract the 'ID' value and trim any leading/trailing spaces
+                        id = document.getElementById("hiddenField").value;
+
+                        idValue = part.split(':')[1].trim();
+                        console.log(id);
+                        console.log(idValue);
+                        $.ajax({
+                            url: '/api/updatenation/' + id + '/' + idValue,
+                            method: 'POST',
+
+                            contentType: 'application/json',
+                            success: function(response) {
+                                // Assuming the nationalities are stored in response.nation array
+
+                                console.log(response);
+                                alert("Data Updated");
+
+                                // Iterate over the nationalities array
+
+                            },
+                            error: function(error) {
+                                console.log('Error:', error);
+                            }
+                        });
+                        break; // Exit the loop once 'ID' is found
+                    }
+                }
+
+                // Push the checkbox value and extracted ID value to the checkedValues array
+                checkedValues.push({
+                    checkboxValue: checkboxValue,
+                    idValue: idValue
+                });
+            });
+
+            console.log(checkedValues);
+
+
+
+
+
+
+            // for (var i = 0; i < checkboxes.length; i++) {
+            //     nation.push(checkboxes[i].value);
+            // }
+
+            // var offer_id = document.getElementById('offer_put').value;
+
+            // console.log(offer_id);
+            // console.log(nation);
+
+            // var data = {
+            //     offer_id: offer_id,
+            //     nation: nation
+            // };
+
+
+        }
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -333,12 +422,26 @@
                             '" onchange="view_nation(' + option.id + ')"></td>' +
                             // '<td>' + option.id + '</td>' +
                             // '<td>' + option.document_type + '</td>' +
-                            '<td>' + option.document_name + '</td>' +
+                            '<td>' + option.document_name +'ID'+ option.id + '</td>' +
                             '<td class="text-left"><a href="/offers_rules/edit/' + option.id +
                             '" class="fa fa-pencil" aria-hidden="true"></a></td>' +
                             '</tr>';
                         tbody.append(row);
                     });
+                    // Assuming you have a <tbody> element with an ID 'countryTableBody'
+                    // var tbody = $('#countryTableBody');
+
+                    // $.each(response, function(index, option) {
+                    //     var row = '<tr>' +
+                    //         '<td><input type="checkbox" id="offer_id" value="' + option.vid +
+                    //         '" onchange="view_nation(' + option.id + ')"></td>' +
+                    //         '<td>' + option.document_name + '</td>' +
+                    //         '<td class="text-left"><a href="/offers_rules/edit/' + option.id +
+                    //         '" class="fa fa-pencil" aria-hidden="true"></a></td>' +
+                    //         '</tr>';
+                    //     tbody.append(row);
+                    // });
+
 
                 }
             });
@@ -375,7 +478,7 @@
                         "Jamaica", "Japan", "Jersey", "Jordan", "Kazakstan", "Kenya", "Kiribati",
                         "Korea, Republic of",
                         "Kuwait", "Kyrgyzstan",
-                         "Latvia", "Lebanon", "Lesotho", "Liberia",
+                        "Latvia", "Lebanon", "Lesotho", "Liberia",
                         "Libyan Arab Jamahiriya", "Liechtenstein", "Lithuania", "Luxembourg", "Macao",
                         "Macedonia, The Former Yugoslav Republic Of", "Madagascar", "Malawi", "Malaysia",
                         "Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", "Mauritania",
@@ -397,11 +500,11 @@
                         "Syrian Arab Republic", "Taiwan, Province of China", "Tajikistan",
                         "Tanzania, United Republic of", "Thailand", "Timor-Leste", "Togo", "Tokelau",
                         "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey",
-                         "Turkmenistan", "Turks and Caicos Islands",
+                        "Turkmenistan", "Turks and Caicos Islands",
                         "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom",
                         "United States", "United States Minor Outlying Islands", "Uruguay", "Uzbekistan",
                         "Vanuatu", "Venezuela", "Vietnam", "Virgin Islands, British",
-                       "Wallis and Futuna", "Western Sahara", "Yemen", "Zambia",
+                        "Wallis and Futuna", "Western Sahara", "Yemen", "Zambia",
                         "Zimbabwe"
                     ];
 
@@ -435,19 +538,28 @@
                                     var checkboxFound =
                                         false; // Flag to track if the checkbox is found
 
+
+
                                     $('#countryTable input[type="checkbox"]').each(function() {
                                         if ($(this).val() === nationality) {
+                                            // Get the item.id from the data-item-id attribute
+                                            var countryName = $(this).val();
+                                            var offerId = $(this).data('offer-id');
+
                                             $(this).prop('checked', false);
                                             checkboxFound = true;
+
                                             $('#additionalData_' + nationality).html(
-                                                'Offer Type: ' +
-                                                item.visa_type +
+                                                'Offer Type: ' + item.visa_type +
                                                 ',<br> Offer Price: ' + item
                                                 .base_rate_adult +
                                                 '<br>Visa Validity:' + item
-                                                .visa_validity);
+                                                .visa_validity +
+                                                '<br>ID:' + item.id
+                                            ); // Use offerId
                                         }
                                     });
+
 
                                     if (!checkboxFound) {
                                         console.log('Checkbox not found for nationality: ' +
@@ -517,6 +629,12 @@
 
         function view_nation(id) {
             console.log(id);
+            // Get a reference to the hidden input element by its ID
+            var hiddenField = document.getElementById("hiddenField");
+
+            // Set the value of the hidden input field
+            hiddenField.value = id;
+
             var update_field = document.getElementById("offer_put");
             // update_field.value = id;
 
@@ -549,7 +667,7 @@
                         "Jamaica", "Japan", "Jersey", "Jordan", "Kazakstan", "Kenya", "Kiribati",
                         "Korea, Republic of",
                         "Kuwait", "Kyrgyzstan",
-                         "Latvia", "Lebanon", "Lesotho", "Liberia",
+                        "Latvia", "Lebanon", "Lesotho", "Liberia",
                         "Libyan Arab Jamahiriya", "Liechtenstein", "Lithuania", "Luxembourg", "Macao",
                         "Macedonia, The Former Yugoslav Republic Of", "Madagascar", "Malawi", "Malaysia",
                         "Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", "Mauritania",
@@ -571,11 +689,11 @@
                         "Syrian Arab Republic", "Taiwan, Province of China", "Tajikistan",
                         "Tanzania, United Republic of", "Thailand", "Timor-Leste", "Togo", "Tokelau",
                         "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey",
-                         "Turkmenistan", "Turks and Caicos Islands",
+                        "Turkmenistan", "Turks and Caicos Islands",
                         "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom",
                         "United States", "United States Minor Outlying Islands", "Uruguay", "Uzbekistan",
                         "Vanuatu", "Venezuela", "Vietnam", "Virgin Islands, British",
-                       "Wallis and Futuna", "Western Sahara", "Yemen", "Zambia",
+                        "Wallis and Futuna", "Western Sahara", "Yemen", "Zambia",
                         "Zimbabwe"
                     ]; // Replace with your actual list of countries
 

@@ -12,11 +12,6 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="/public/plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('/new_css/style.css') }}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap2-toggle.min.css"
-        rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap2-toggle.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <!-- Ionicons -->
 
     <!-- Tempusdominus Bootstrap 4 -->
@@ -28,162 +23,512 @@
     <link rel="stylesheet" href="/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="/plugins/summernote/summernote-bs4.min.css">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-        #datePickerDropdown {
-            background-color: #fff;
-            /* Set the background color to white */
+        [class*=sidebar-dark-] .sidebar a {
+            color: #565656 !important;
         }
 
-        .card {
-            background: #fafafa;
+        [class*=sidebar-dark-] .sidebar a:hover {
+            color: #090909 !important;
+            background-color: #fde4ad !important;
+        }
+    </style>
+    <style>
+        .custom-input {
             border-radius: 10px;
-            box-shadow: 0 0 7px 2px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+            padding: 5px;
         }
 
-        .card-description {
-            font-size: 24px;
-            color: #333;
-            margin: 0;
+        #nationality {
+            font-size: 17px !important;
+            line-height: 1.0rem !important;
+            vertical-align: top;
+            margin-bottom: 0.5rem;
+            font-family: system-ui;
         }
 
-        .form-sample {
-            padding: 20px;
+        #traveling {
+            font-size: 17px !important;
+            line-height: 1.0rem !important;
+            vertical-align: top;
+            margin-bottom: 0.5rem;
+            font-family: system-ui;
         }
 
-        hr {
-            border: none;
-            border-top: 1px solid #ccc;
+        #startdate {
+            font-size: 15px !important;
+            /* line-height: 1.0rem; */
+            vertical-align: top;
+            margin-bottom: 0.5rem;
+            font-family: system-ui;
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        #enddate {
+            font-size: 17px !important;
+            /* line-height: 1.0rem; */
+            vertical-align: top;
+            margin-bottom: 0.5rem;
+            font-family: system-ui;
         }
 
-        label {
-            font-weight: bold;
-            color: #333;
-        }
-
-        .custom-select {
-            width: 100%;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            background: #fff;
-            color: #333;
-            font-size: 16px;
-        }
-
-        .custom-select:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-        }
-
-        .required-field {
-            color: #ff0000;
-        }
-
-        /* Customize the select2 dropdown */
-        .select2-container .select2-selection--single {
-            height: 42px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            background: #fff;
-        }
-
-        .select2-selection--single .select2-selection__arrow b {
-            border-color: #333 transparent transparent transparent;
-        }
-
-        .select2-selection--single .select2-selection__rendered {
-            color: #333;
-        }
-
-        /* Adjust the appearance of the search box */
-        .select2-search--dropdown .select2-search__field {
-            border: none;
-            border-bottom: 2px solid #007bff;
-        }
-
-        /* Custom CSS for attractive radio buttons styled as switches */
-
-        /* Custom CSS for attractive radio buttons styled as switches */
-
-        /* Custom CSS for attractive radio buttons styled as switches */
-
-        .custom-switch-field {
+        .switch-field {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            margin-bottom: 36px;
+            overflow: hidden;
+            font-family: system-ui;
         }
 
-        .custom-switch-field input[type="radio"] {
+        .switch-field input {
+            position: absolute !important;
+            clip: rect(0, 0, 0, 0);
+            height: 1px;
+            width: 1px;
+            font-family: system-ui;
+            border: 0;
+            margin-left: 3%;
+            overflow: hidden;
+        }
+
+        .switch-field label {
+            background-color: #ffffff;
+            color: rgba(0, 0, 0, 0.6);
+            font-size: 14px;
+            font-weight: 100%;
+            line-height: 1;
+            text-align: center;
+            padding: 8px 16px;
+            margin-right: -1px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+            transition: all 0.1s ease-in-out;
+        }
+
+        .switch-field label:hover {
+            cursor: pointer;
+        }
+
+        .switch-field input:checked+label {
+            background-color: #039afe;
+            color: #ffffff;
+            box-shadow: none;
+            font-size: medium;
+        }
+
+        .switch-field label:first-of-type {
+            border-radius: 4px 0 0 4px;
+        }
+
+        #coupon-container_document {
+            display: flex;
+            flex-direction: row-reverse;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            align-items: center;
+            align-content: center;
+        }
+
+        .switch-field label:last-of-type {
+            border-radius: 0 4px 4px 0;
+        }
+
+        .card .card-description {
+            margin-bottom: 0.875rem;
+            font-weight: 700;
+            color: #393939;
+            font-family: system-ui;
+        }
+
+        .tabset>input[type="radio"] {
+            position: absolute;
+            left: -200vw;
+        }
+
+        .tabset .tab-panel {
             display: none;
         }
 
-        .custom-label {
+        .tabset>input:first-child:checked~.tab-panels>.tab-panel:first-child,
+        .tabset>input:nth-child(3):checked~.tab-panels>.tab-panel:nth-child(2),
+        .tabset>input:nth-child(5):checked~.tab-panels>.tab-panel:nth-child(3),
+        .tabset>input:nth-child(7):checked~.tab-panels>.tab-panel:nth-child(4),
+        .tabset>input:nth-child(9):checked~.tab-panels>.tab-panel:nth-child(5),
+        .tabset>input:nth-child(11):checked~.tab-panels>.tab-panel:nth-child(6) {
+            display: block;
+        }
+
+        .tabset>label {
             position: relative;
-            padding: 10px 18px 11px 39px;
-            background-color: #e9e9e9;
-            border: 1px solid #ccc;
-            border-radius: 30px;
+            display: inline-block;
+            padding: 15px 15px 25px;
+            border: 1px solid transparent;
+            border-bottom: 0;
             cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
+            font-weight: 600;
+        }
+
+        .tabset>label::after {
+            content: "";
+            position: absolute;
+            left: 15px;
+            bottom: 10px;
+            width: 22px;
+            height: 4px;
+            background: #8d8d8d;
+        }
+
+        input:focus-visible+label {
+            outline: 2px solid rgba(0, 102, 204, 1);
+            border-radius: 3px;
+        }
+
+        .tabset>label:hover,
+        .tabset>input:focus+label,
+        .tabset>input:checked+label {
+            color: #06c;
+        }
+
+        .tabset>label:hover::after,
+        .tabset>input:focus+label::after,
+        .tabset>input:checked+label::after {
+            background: #06c;
+        }
+
+        .tabset>input:checked+label {
+            border-color: #ccc;
+            border-bottom: 1px solid #fff;
+            margin-bottom: -1px;
+        }
+
+        .tab-panel {
+            padding: 30px 0;
+            border-top: 1px solid #ccc;
+        }
+
+        .tabset {
+            width: 100%;
+        }
+
+        .bi::before,
+        [class^="bi-"]::before,
+        [class*=" bi-"]::before {
+            display: inline-block;
+            font-family: bootstrap-icons !important;
+            font-style: normal;
+            font-weight: normal !important;
+            font-variant: normal;
+            text-transform: none;
+            line-height: 1;
+            color: black;
+            vertical-align: -0.125em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+    <style>
+        .coupon-container {
             display: flex;
+            justify-content: left;
+            align-items: left;
+            float: left;
+
+        }
+
+        .coupon {
+            /* background-color: #f5f5f5;
+            border: 1px solid #ccc; */
+            border-radius: 5px;
+            padding: 10px;
+            margin-right: 10px;
+        }
+
+        .coupon-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .coupon-description {
+            margin-bottom: 5px;
+            margin-top: 5%;
+        }
+    </style>
+    <style>
+        .custom-card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-right: 10px;
+            display: flex;
+            justify-content: left;
             align-items: center;
         }
 
-        .custom-label::before {
-            content: "";
-            position: absolute;
-            top: 1px;
-            margin-left: -8px;
-            left: 2px;
-            width: 39px;
-            height: 42px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 50%;
-            transition: transform 0.3s;
+        .custom-card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
         }
 
-        .custom-switch-field input[type="radio"]:checked+.custom-label {
-            background-color: #007bff;
+        .custom-card-text {
+            /* margin-bottom: 5px; */
+            margin-top: 5px;
+        }
+
+        .custom-card-button {
+            background-color: #f5a720;
             color: #fff;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .custom-switch-field input[type="radio"]:checked+.custom-label::before {
-            left: calc(30% - 2px);
-            transform: translateX(-100%);
-            transition: transform 0.3s;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
         }
     </style>
-    <!-- <script>
-        import React from 'react';
-        import ReactDOM from 'react-dom';
-        import AntDesignComponent from './js/components/AntDesignComponent'; // Correct the path to the AntDesignComponent file
-        import Datepicker from './js/components/datepicker'; // Correct the path to the datepicker file
+    <style>
+        .coupon-container {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+        }
 
-        ReactDOM.render( < AntDesignComponent / > , document.getElementById('datepicker'));
-    </script> -->
-    <!-- <script src="{{ asset('/js/components/datepicker.jsx') }}"></script>
-    <script>
-        import React from 'react';
-        import ReactDOM from 'react-dom';
-        import AntDesignComponent from '/js/components/AntDesignComponent';
-        ReactDOM.render( < AntDesignComponent / > , document.getElementById('datepicker'));
-    </script> -->
+        .coupon {
+            /* background-color: #f5f5f5;
+            border: 1px solid #ccc; */
+            border-radius: 5px;
+            padding: 10px;
+            margin-right: 10px;
+        }
+
+        .coupon-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .coupon-description {
+            margin-bottom: 5px;
+        }
+    </style>
+
+    <style>
+        /* Add your custom styles to the input field */
+        .custom-date-picker {
+            /* Add your custom styling here */
+            position: relative;
+        }
+
+        /* Style the date picker dropdown */
+        .date-picker-dropdown {
+            position: absolute;
+            z-index: 1;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 5px;
+            /* Add your custom styling for the dropdown */
+            display: none;
+        }
+    </style>
+    <style>
+        /* Add your custom styles to the input field */
+        .custom-date-picker {
+            /* Add your custom styling here */
+            position: relative;
+        }
+
+        /* Style the date picker dropdown */
+        .date-picker-dropdown {
+            position: absolute;
+            z-index: 1;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 5px;
+            /* Add your custom styling for the dropdown */
+            display: none;
+        }
+    </style>
+
+    <style>
+        .dropzone {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            background-color: #f8f9fa;
+        }
+
+        .dropzone:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* Hide the default file input */
+        #fileInput {
+            display: none;
+        }
+    </style>
+
+    <style>
+        /* Styling for the date picker dropdown */
+        .date-picker-dropdown {
+            display: none;
+            /* Hide the dropdown by default */
+            position: absolute;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        /* Styling for the date picker input field */
+        .form-control {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Additional styling for the date picker dropdown */
+        /* Customize these styles as per your preference */
+        .date-picker-dropdown input[type="date"] {
+            width: 150px;
+            padding: 5px;
+        }
+    </style>
+
+    <style>
+        .ticket {
+            border: 1px solid #c7c7c7;
+            padding: 10px;
+            padding-bottom: 1px;
+            border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: 0px -1px 15px 4px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+            height: fit-content;
+            /* display: flex; */
+            justify-content: space-between;
+            /* Aligns items to both ends */
+        }
+
+        .file-input {
+            display: flex;
+            align-items: center;
+            /* Vertically center align the input elements */
+        }
+
+        .file-input input {
+            margin-left: 10px;
+            /* Add some spacing between the label and the input */
+        }
+
+
+        .custom-card-text {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-control {
+            width: 100%;
+            /* padding: 10px; */
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Optional: If you want to style the file input button */
+        .form-control[type="file"] {
+            cursor: pointer;
+            background-color: #fff;
+            color: #555;
+        }
+
+        .form-control[type="file"]::-webkit-file-upload-button {
+            cursor: pointer;
+            padding: 8px 12px;
+            border: 2px solid #555;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            font-size: 16px;
+        }
+
+        .form-control[type="file"]::before {
+            content: "Browse";
+            /* Change this to your desired button text */
+        }
+
+        .form-control[type="file"]:hover::before {
+            border-color: #333;
+        }
+
+        .form-control[type="file"]:focus::before {
+            outline: none;
+            border-color: #555;
+        }
+
+        /* Optional: If you want to style the multiple file selection text */
+        .form-control[type="file"]::after {
+            content: "Choose files";
+            /* Change this to your desired text */
+            font-size: 14px;
+            display: block;
+            margin-top: 5px;
+        }
+
+        /* Optional: If you want to style the file names after selection */
+        .form-control[type="file"]:not(:focus)+.selected-files::before {
+            content: attr(data-placeholder);
+            font-size: 14px;
+            color: #555;
+        }
+
+        /* Optional: If you want to show the selected file names */
+        .form-control[type="file"]:focus+.selected-files::before {
+            content: attr(data-content);
+            font-size: 14px;
+            color: #333;
+        }
+
+        .required-field {
+            color: red;
+        }
+    </style>
+
+    <style>
+        .image-preview {
+            display: inline-block;
+            margin: 10px;
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+
+        .image-preview img {
+            max-width: 187px;
+            max-height: 132px;
+        }
+
+        .delete-button {
+            display: block;
+            margin-top: 5px;
+            background-color: #ff5a5a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+    </style>
+
+
 </head>
-
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -206,43 +551,31 @@
             <div class="main-panel">
                 <form action="/visa/store_applications" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="container-fluid pt-3">
+                    <div class="continer-fluid">
                         <div class="row">
-                            <div class="col-md-12 col-md-12 grid-margin">
+                            <div class="col-12 grid-margin">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h3 class="card-description">Apply for a New Visa</h3>
+                                        <h3 class="card-description">Apply New Visa</h3>
                                         <div class="form-sample">
-
-                                                <div class="row form-group">
-                                                    <!-- Nationality Select -->
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="nationality">Nationality <span
-                                                                    class="required-field">*</span></label>
-                                                            <select class="form-control select2 custom-select"
-                                                                name="nationality" id="nationality"
-                                                                data-live-search="true" required>
+                                            <!-- <p class="card-description">
+                      Basic info
+                    </p> -->
+                                            <hr>
+                                            <br>
+                                            <div class="row form-group">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <label class="col-sm-1.5 col-form-label"
+                                                            id="nationality">Nationality <span
+                                                                class="required-field">*</span></label>
+                                                        <div class="col-sm-6">
+                                                            <select class="form-control" name="nationality"
+                                                                id="nationality" required>
                                                                 <option value="">Select Nationality</option>
                                                                 @foreach ($country as $option)
-                                                                    <option value="{{ $option->country_name }}">
-                                                                        {{ $option->country_name }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Destination Select -->
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="travel_to">Destination <span
-                                                                    class="required-field">*</span></label>
-                                                            <select class="form-control select2 custom-select"
-                                                                name="destination" id="travel_to"
-                                                                data-live-search="true" onchange="getOffer()" required>
-                                                                <option value="">Select Destination</option>
-                                                                @foreach ($country as $option)
-                                                                    <option value="{{ $option->country_name }}">
+                                                                    <option name="nationality"
+                                                                        value="{{ $option->country_name }}">
                                                                         {{ $option->country_name }}
                                                                     </option>
                                                                 @endforeach
@@ -250,12 +583,30 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- <button class="btn btn-primary" type="submit">Submit</button> -->
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <label class="col-sm-1.5 col-form-label traveling"
+                                                            id="traveling">Destination <span
+                                                                class="required-field">*</span></label>
 
+                                                        <div class="col-sm-6">
+                                                            <select class="form-control" name="destination"
+                                                                id="travel_to" onchange="getOffer()" required>
+                                                                <option value="">Select Destination</option>
+                                                                @foreach ($country as $option)
+                                                                    <option name="travel_to" id="travel_to"
+                                                                        value="{{ $option->country_name }}">
+                                                                        {{ $option->country_name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <br>
                         </div>
@@ -270,47 +621,35 @@
                                             <hr>
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <div class="row">
+                                                    <div class="form-group row ">
                                                         <label class="col-sm-1.5 " id="startdate">From Date<span
                                                                 class="required-field">*</span></label>
                                                         <div class="col-sm-8">
                                                             <div class="custom-date-picker">
                                                                 <!-- Single input field for both typing and date selection -->
-                                                                <div class="input-group-append">
+                                                                <input type="text" id="from_date" name="from_date"
+                                                                    class="form-control" required>
 
-
-                                                                    <input type="text" id="from_date"
-                                                                        name="from_date" class="form-control"
-                                                                        placeholder="DD-MM-YYYY" required>
-                                                                    <span class="input-group-text"><i
-                                                                            class="fa fa-calendar"></i></span>
+                                                                <!-- Date picker dropdown -->
+                                                                <div class="date-picker-dropdown"
+                                                                    id="datePickerDropdown">
+                                                                    <input type="date" id="from_date_picker"
+                                                                        name="from_date_picker">
                                                                 </div>
-                                                            </div>
-
-                                                            <!-- Date picker dropdown -->
-                                                            <div class="date-picker-dropdown" id="datePickerDropdown"
-                                                                style="background-color: #f8f9fa;">
-                                                                <input type="date" id="from_date_picker"
-                                                                    name="from_date_picker">
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-
                                                 <div class="col-md-6">
                                                     <div class="form-group row ">
                                                         <label class="col-sm-1.5 " id="enddate">To Date<span
                                                                 class="required-field">*</span></label>
                                                         <div class="col-sm-8">
                                                             <div class="custom-date-picker">
-                                                                <div class="input-group-append">
-                                                                    <!-- Single input field for both typing and date selection -->
-                                                                    <input type="text" id="to_date"
-                                                                        name="to_date" class="form-control"
-                                                                        placeholder="DD-MM-YYYY" required>
-                                                                    <span class="input-group-text"><i
-                                                                            class="fa fa-calendar"></i></span>
-                                                                </div>
+                                                                <!-- Single input field for both typing and date selection -->
+                                                                <input type="text" id="to_date" name="to_date"
+                                                                    class="form-control" required>
+
                                                                 <!-- Date picker dropdown -->
                                                                 <div class="date-picker-dropdown"
                                                                     id="datePickerDropdownTo">
@@ -326,39 +665,54 @@
                                     </div>
                                 </div>
                             </div>
+
+
+
                             <div class="col-md-3">
                                 <div class="card">
-                                    <div class="card-body" style="padding: 8px 1px 35px;">
+                                    <div class="card-body">
                                         <div class="form-sample">
-                                            <p class="card-description">Visa Types</p>
+                                            <p class="card-description">
+                                                Visa Types
+                                            </p>
                                             <hr>
-                                            <div class="custom-switch-field">
+                                            <div class="switch-field">
                                                 <input type="radio" id="radio-one-1" name="switch-one-1"
-                                                    value="standard visa" checked>
-                                                <label for="radio-one-1" class="custom-label">Standard Visa</label>
+                                                    value="standard visa" checked="">
+                                                <label for="radio-one-1">Standard Visa</label>
                                                 <input type="radio" id="radio-two-1" name="switch-one-1"
                                                     value="express visa">
-                                                <label for="radio-two-1" class="custom-label">Express Visa</label>
+                                                <label for="radio-two-1">Express Visa</label>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="card">
-                                    <div class="card-body" style="padding: 8px 1px 35px;">
+                                    <div class="card-body">
                                         <div class="form-sample">
                                             <p class="card-description">
                                                 Entry Type
                                             </p>
                                             <hr>
-                                            <div class="custom-switch-field">
-                                                <input type="radio" id="radio-two-2" name="switch-one-2"
-                                                    value="standard visa" checked="" onchange="getOffer()">
-                                                <label for="radio-two-2" class="custom-label">Single Entry</label>
+                                            {{-- <div class="switch-field">
+                                            <input type="radio" id="radio-one-1" name="switch-one-2"
+                                                value="single_entry" checked="">
+                                            <label for="radio-one-2">Single Entry</label>
+                                            <input type="radio" id="radio-two-2" name="switch-one-2"
+                                                value="multi_entry" onselect="">
+                                            <label for="radio-two-2">Multiple Entry</label>
+                                        </div> --}}
+                                            <div class="switch-field">
+                                                <input type="radio" id="radio-one-2" name="switch-one-2"
+                                                    checked="" onchange="getOffer()">
+
+                                                <label for="radio-one-2">Single Entry</label>
                                                 <input type="radio" id="radio-two-3" name="switch-one-2"
-                                                    value="express visa" onchange="get_offer_multiple()">
-                                                <label for="radio-two-3" class="custom-label">Multiple Entry</label>
+                                                    onchange="get_offer_multiple()">
+                                                <label for="radio-two-3">Multiple Entry</label>
                                             </div>
                                         </div>
                                     </div>
@@ -374,6 +728,7 @@
                                             <h3 class="card-description">
                                                 Visa Offers
                                             </h3>
+
                                             <div id="currency_selection_div">
                                                 <!-- Add the buttons here -->
                                                 <select class="form-control" id="currency_code"
@@ -393,84 +748,70 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+
+
+
                                             <hr>
                                             <div class="tabset">
-                                                <!-- tabs -->
-                                                <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1">
-                                                    <input type="radio" name="pcss3t" checked id="tab1"
-                                                        class="tab-content-first">
-                                                    <label for="tab1"><i class="icon-globe"></i>Tourist</label>
-
-                                                    <input type="radio" name="pcss3t" id="tab2"
-                                                        class="tab-content-2">
-                                                    <label for="tab2"><i class="icon-picture"></i>Business</label>
-
-                                                    <input type="radio" name="pcss3t" id="tab3"
-                                                        class="tab-content-3">
-                                                    <label for="tab3"><i class="icon-cogs"></i>Student</label>
-
-                                                    <input type="radio" name="pcss3t" id="tab5"
-                                                        class="tab-content-last">
-                                                    <label for="tab5"><i class="icon-globe"></i>Transit</label>
-
-                                                    <input type="radio" name="pcss3t" id="tab6"
-                                                        class="tab-content-last">
-                                                    <label for="tab6"><i class="icon-globe"></i>Medical</label>
-
-                                                    <ul>
-                                                        <li class="tab-content tab-content-first typography">
-
-
-                                                            <div id="coupon-container"></div>
-
-                                                        </li>
-
-                                                        <li class="tab-content tab-content-2 typography">
-
-                                                            <div id="coupon-container_bussiness"></div>
-
-                                                        </li>
-
-                                                        <li class="tab-content tab-content-3 typography">
-
-                                                            <div id="coupon-container_student"></div>
-
-                                                        </li>
-
-                                                        <li class="tab-content tab-content-4 typography">
-                                                            <div class="typography">
-
-                                                                <div id="coupon-container_transit"></div>
-
-                                                            </div>
-                                                        </li>
-
-                                                        <li class="tab-content tab-content-last typography">
-                                                            <div class="typography">
-
-                                                                <div id="coupon-container_medical"></div>
-
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-
-                                                <!-- <input type="radio" name="tabset" id="tab1" aria-controls="marzen" checked>
+                                                <input type="radio" name="tabset" id="tab1"
+                                                    aria-controls="marzen" checked>
                                                 <label for="tab1">Tourist</label>
 
-                                                <input type="radio" name="tabset" id="tab2" aria-controls="rauchbier">
+                                                <input type="radio" name="tabset" id="tab2"
+                                                    aria-controls="rauchbier">
                                                 <label for="tab2">Business</label>
 
-                                                <input type="radio" name="tabset" id="tab3" aria-controls="dunkles">
+                                                <input type="radio" name="tabset" id="tab3"
+                                                    aria-controls="dunkles">
                                                 <label for="tab3">Student</label>
 
-                                                <input type="radio" name="tabset" id="tab4" aria-controls="popcorn">
-                                                <label for "tab4">Transit</label>
+                                                <input type="radio" name="tabset" id="tab4"
+                                                    aria-controls="popcorn">
+                                                <label for="tab4">Transit</label>
 
-                                                <input type="radio" name="tabset" id="tab5" aria-controls="sweet">
-                                                <label for="tab5">Medical</label> -->
+                                                <input type="radio" name="tabset" id="tab5"
+                                                    aria-controls="sweet">
+                                                <label for="tab5">Medical</label>
 
                                                 <div class="tab-panels">
+                                                    <section id="marzen" class="tab-panel">
+                                                        <!-- <h2>6A. Märzen</h2> -->
+                                                        <div id="coupon-container"></div>
+                                                        <div id="no-offers-message" style="display: none;">No offers
+                                                            for
+                                                            Tourist </div>
+                                                    </section>
+                                                    <section id="rauchbier" class="tab-panel">
+                                                        <!-- <h2>6B. Rauchbier</h2> -->
+                                                        <div id="coupon-container_bussiness"></div>
+                                                        <div id="no-offers-message" style="display: none;">No offers
+                                                            for
+                                                            Tourist </div>
+                                                    </section>
+                                                    <section id="dunkles" class="tab-panel">
+                                                        <!-- <h2>6C. Dunkles Bock</h2> -->
+                                                        <div id="coupon-container_student"></div>
+                                                        <div id="no-offers-message" style="display: none;">No offers
+                                                            for
+                                                            Tourist </div>
+
+                                                    </section>
+                                                    <section id="popcorn" class="tab-panel">
+                                                        <!-- <h2>6C. Dunkles Bock</h2> -->
+                                                        <div id="coupon-container_transit"></div>
+                                                        <div id="no-offers-message" style="display: none;">No offers
+                                                            for
+                                                            Tourist </div>
+
+                                                    </section>
+                                                    <section id="sweet" class="tab-panel">
+                                                        <!-- <h2>6C. Dunkles Bock</h2> -->
+                                                        <div id="coupon-container_medical"></div>
+                                                        <div id="no-offers-message" style="display: none;">No offers
+                                                            for
+                                                            Tourist </div>
+
+                                                    </section>
 
                                                     {{-- Model Start --}}
 
@@ -514,7 +855,7 @@
                                                                                 <td id="servicePrice">NULL</td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <td id="serviceType">GST(18%)</td>
+                                                                                <td id="TaxType">GST(18%)</td>
                                                                                 <td id="taxPrice">NULL</td>
                                                                             </tr>
                                                                             <tr>
@@ -554,12 +895,12 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
                                                     <h4 class="card-description">Documents Required</h4>
                                                     <hr>
                                                 </div>
 
-                                                <div class="col-md-12 text-md-right">
+                                                <div class="col-md-6 text-md-right">
                                                     <!-- Add the buttons here -->
                                                     {{-- <button class="btn" id="button_new_tab"
                                                         style="background-color: #039afe;color:white;">View Document
@@ -599,10 +940,11 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
                                                     <h5 class="card-description">Additional Documents Required</h5>
                                                     <hr>
                                                 </div>
+
                                                 <div class="col-md-6 text-md-right">
                                                     <!-- Add the buttons here -->
                                                     {{-- <button class="btn" id="button_new_tab"
@@ -620,9 +962,17 @@
                                                         <div id="coupon-container_document_1" style="display: flex;">
                                                             {{-- </div> --}}
                                                         </div>
+
                                                     </div>
                                                 </div>
+
+
+
                                             </div>
+
+
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -632,7 +982,8 @@
                         <div class="row">
                             <div class="col-12 grid-margin">
                                 <div class="card">
-                                    <div class="card-body " style="background-color: #f8f9fa; border-radius: 10px;">
+                                    <div class="card-body "
+                                        style="background-color: #f8f9fa; border: 2px dash black;">
                                         <h3 class="card-description">Upload Documents</h3>
                                         <div class="container mt-5">
                                             <div class="row">
@@ -659,6 +1010,10 @@
                                 </div>
                             </div>
                         </div><!-- Example -->
+
+
+
+
                         <section id="marzen_1" class="tab-panel">
                             <div class="row">
                                 <div class="col-12 grid-margin">
@@ -667,7 +1022,6 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <h3 class="card-description">Documents Uploaded</h3>
-                                                    <hr>
                                                     <div id="imageContainer">
                                                         <!-- Images will be displayed here -->
                                                         <div class="row">
@@ -675,24 +1029,35 @@
 
                                                             </div>
                                                         </div>
+
                                                     </div>
                                                 </div>
+
+
 
                                                 <!-- Rest of your content here -->
 
                                             </div>
+
+
+
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </section>
 
+
+
+
+
                         <div class="row">
                             <div class="col-12 grid-margin">
                                 <div class="card">
                                     <div class="card-body">
                                         <h3 class="card-description">Disclaimer</h3>
-                                        <div class="form-sample" style="padding: 5px;">
+                                        <div class="form-sample">
                                             <hr>
                                             <li class="pt-2">Please note that the processing time indicated are from
                                                 the
@@ -724,7 +1089,7 @@
                     margin-top: 1%;
                     width: 166px;
                     height  : 50px;
-                    ">
+                ">
                     <input type="submit" class="float-right btn btn-danger" value="Archive Application"
                         style="
                     margin-right: 2%;
@@ -732,7 +1097,7 @@
                     margin-top: 1%;
                     width: 166px;
                     height: 50px;
-                     ">
+                ">
                 </form>
 
 
@@ -741,48 +1106,19 @@
         </div>
 
     </div>
-    <!-- Include Flatpickr JavaScript from a CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            flatpickr("#from_date_picker", {
-                allowInput: true, // Allow manual date entry
-                altFormat: "F j, Y",
-                dateFormat: "Y-m-d", // Set the date format to yyyy-mm-dd
-                altInput: true, // Enable the alternate input field
-                altInputClass: "form-control", // Apply the same style as the original input
-                altInputPlaceholder: "DD-MM-YYYY" // Placeholder for the alternate input field
-            });
-            flatpickr("#to_date_picker", {
-                allowInput: true, // Allow manual date entry
-                altFormat: "F j, Y",
-                dateFormat: "Y-m-d", // Set the date format to yyyy-mm-dd
-                altInput: true, // Enable the alternate input field
-                altInputClass: "form-control", // Apply the same style as the original input
-                altInputPlaceholder: "DD-MM-YYYY" // Placeholder for the alternate input field
+        // Initialize Swiper when the document is ready
+        $(document).ready(function() {
+            var swiper = new Swiper('.swiper-container', {
+                slidesPerView: 'auto', // Show as many slides as possible
+                spaceBetween: 10, // Space between slides
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
             });
         });
     </script>
-    @section('scripts')
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const container = document.getElementById('datepicker-container');
-                ReactDOM.render( < Datepicker / > , container);
-            });
-        </script>
-    @show
-    <script src="/js/components/datepicker.js"></script>
-    <script>
-        // Initialize Bootstrap Toggle on the checkboxes
-        $(function() {
-            $('input[type="checkbox"]').bootstrapToggle();
-        });
-    </script>
-    <script>
-        $('.select2').select2();
-    </script>
-
     <script src="/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
@@ -815,76 +1151,88 @@
     <script src="/dist/js/adminlte.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="/dist/js/demo.js"></script>
-
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="/publicdist/js/pages/dashboard.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+
+    <!-- Your HTML code remains the same -->
+
+    {{-- <script>
+        function curreny_update() {
+            var currency = document.getElementById('currency_code');
+            var priceElements = document.querySelectorAll('#price_offer');
+            var targetElements = document.querySelectorAll('#price_offer_1');
+            var checkk = document.querySelectorAll('.checkk');
+            console.log(checkk.length);
+            var len = checkk.length;
+
+            console.log(currency.value);
+            console.log(priceElements);
+            console.log(typeof priceElements);
+            console.log(targetElements);
+
+            if (!currency) {
+                console.error('Element with ID "currency_code" not found.');
+                return;
+            }
 
 
 
-    <script>
-        function getModel(id, user_id) {
-            // Set the ID in the modal when it's shown
-            $('#modalOfferId').text('ID: ' + id);
+            if (currency.value === '') {
+                // If no currency is selected, reset the offer_price elements to their original values
+                // for (var i = 0; i < priceElements.length; i++) {
+                //     targetElements[i].innerHTML = "Visa Price: " + parseFloat(priceElements[i].value).toFixed(2);
+                //     targetElements1.innerHTML = "hwy";
+                // }
+            } else {
+                $.ajax({
+                    url: '/api/convert/' + currency.value,
+                    method: 'GET',
+                    success: function(response) {
+                        console.log(response.offerinfo[0].country_rate);
+                        var countryRate = parseFloat(response.offerinfo[0].country_rate);
 
-            // Make an AJAX request to fetch data from the server
-            $.ajax({
-                url: '/api/offerdetails/' + id + '/' + user_id, // Replace with your server endpoint
-                method: 'GET',
+                        // Loop through all price_offer elements and update the corresponding offer_price element
+                        for (var i = 0; i < priceElements.length; i++) {
+                            var currentPrice = parseFloat(priceElements[i].value);
+                            var calculatedPrice = currentPrice * countryRate;
 
-                success: function(data) {
-                    console.log(data);
-                    if (Array.isArray(data) && data.length > 0) {
-                        // Access the properties of the first offer (index 0)
-                        const offer = data[0];
-                        var description = offer.visa_category + ' | ' + offer.visa_type + ' | ' + offer
-                            .entry_fees + ' | ' + offer.stay_validity + 'Days';
+                            // Target the specific h5 element by its ID
+                            var targetElement = document.getElementById('price_offer_1');
+                            console.log(targetElement);
+                            // Update the content of the h5 element
+                            if (targetElement) {
+                                targetElement.innerHTML = "Visa Price: " + calculatedPrice.toFixed(2);
+                            }
 
-                        // Populate the table cells with data from the server
-                        $('#visaType').text(offer.visa_type);
-                        $('#visaPrice').text('$' + offer.base_rate_adult);
-                        $('#description').text(description);
+                            console.log("sa");
+                            // $('#price_offer_11').text('dsada');
+                        }
 
-
-                        // Assuming that offer.base_rate_adult is a string representing a numeric value
-                        var baseRateAdult = parseFloat(offer.base_rate_adult);
-
-                        // Calculate the GST amount (18% of baseRateAdult)
-                        var gstAmount = (baseRateAdult * 18) / 100;
-
-                        // Calculate the total price (base rate + GST)
-                        var totalPrice = baseRateAdult + gstAmount;
-
-                        // Display the base rate and GST in the #taxPrice element
-                        $('#taxPrice').text(gstAmount.toFixed(2) + ' (GST)');
-
-
-
-                        $('#serviceType').text('Service Fees');
-                        $('#servicePrice').text('$' + offer.govt_fees_adult);
-                        $('#totalPrice').text('$' + (parseFloat(gstAmount) + (parseFloat(offer
-                            .govt_fees_adult) + parseFloat(offer
-                            .base_rate_adult))));
-
-                        var modal = document.getElementById('myModal');
-                        modal.style.display = 'block';
-                    } else {
-                        console.error('No valid offer data received from the server.');
+                        for (var t = 1; t <= checkk.length; t++) {
+                            console.log("chek: " + $('#price_offer' + t).val());
+                        }
+                    },
+                    error: function(error) {
+                        console.log('Error:', error);
                     }
-                },
+                });
+                // Make sure that the ID "price_offer_1"
+                // is unique in your HTML, and this code should update the content of that specific < h5 >
+                //     element correctly when the AJAX request succeeds.
 
-            });
+
+
+
+
+
+            }
         }
-    </script>
-
-
-
-
-
+    </script> --}}
 
     <script>
         function curreny_update() {
@@ -962,7 +1310,6 @@
 
                         // Iterate over the data and generate HTML for each card
                         $.each(response, function(index, item) {
-                            console.log(item);
                             var customCard = $('<div>').addClass('coupon-container');
                             var customCardBody = $('<div>').addClass('coupon').attr('style',
                                 'flex-direction: row;');
@@ -975,7 +1322,7 @@
 
                             // Create card content using the item properties
                             var cardContent = `
-                            <div class="card" onclick="selectCard(this)">
+                            <div class="card">
                                 <div class="card">
     <div class="card-header" style="${item.visa_category === 'e-visa' ? 'background-color:#00aaff;color:white;' : 'background-color:#a77cb6;color:white;'}">
         <!-- Add the tag here based on the type of visa -->
@@ -991,8 +1338,8 @@
         <input type="hidden" id="price_offer" value="${item.base_rate_adult}" />
         <p class="card-text">Processing Time: ${item.processing_time} Working Days</p>
         <p class="card-text">Visa Validity: ${item.visa_validity} Days (From Visa Issuance Date)</p>
-        <p class="card-text">Stay Validity: ${item.stay_validity} Days (From Arrival Date)</p><br>
-       <a href="#" class="btn" style="background-color:#00aaff;color:white;text-decoration:none;" data-toggle="modal" onclick="getModel(${item.id},{{ session('id') }})" data-target="#myModal" style="margin-top: 6px;">View Information</a>
+        <p class="card-text">Stay Validity: ${item.stay_validity} Days (From Arrival Date)</p>
+       <a href="#" class="btn btn-primary" data-toggle="modal" onclick="getModel(${item.id},{{ session('id') }})" data-target="#myModal" style="margin-top: 6px;">View Information</a>
 
     </div>
 </div>
@@ -1031,20 +1378,7 @@
     background-color: #0069d9;
     border-color: #0062cc;
 }
-.selected-card {
-            border: 2px solid #007bff;
-        }
 `;
-var cardScript = document.createElement("script");
-cardScript.textContent = 'function selectCard(card) {' +
-    'var allCards = document.querySelectorAll(".card");' +
-    'allCards.forEach(function(card) {' +
-    'card.classList.remove("selected-card");' +
-    '});' +
-    'card.classList.add("selected-card");' +
-    '}';
-    document.head.appendChild(cardScript);
-
 
                             // Check the visa_type to decide which container to append the card
                             if (item.visa_type === 'Bussiness') {
@@ -1150,8 +1484,8 @@ cardScript.textContent = 'function selectCard(card) {' +
             <input type="hidden" id="price_offer" value="${item.base_rate_adult}" />
             <b><p class="card-text">Processing Time: ${item.processing_time} Working Days</p></b>
             <b><p class="card-text">Visa Validity: ${item.visa_validity} Days (From Visa Issuance Date)</p></b>
-            <b><p class="card-text">Stay Validity: ${item.stay_validity} Days (From Arrival Date)</p></b><br>
-            <a href="#" class="btn" style="background-color:#00aaff;color:white;text-decoration:none;" data-toggle="modal" onclick="getModel(${item.id},{{ session('id') }})" data-target="#myModal" style="margin-top: 6px;">View Information</a>
+            <b><p class="card-text">Stay Validity: ${item.stay_validity} Days (From Arrival Date)</p></b>
+            <a href="#" class="btn btn-primary" data-toggle="modal" onclick="getModel(${item.id})" data-target="#myModal" style="margin-top: 6px;">View Information</a>
 
         </div>
     </div>
@@ -1504,6 +1838,8 @@ cardScript.textContent = 'function selectCard(card) {' +
     </script>
 
 
+
+
     <script>
         // Get the input element
         var fromDateInput = document.getElementById('from_date');
@@ -1515,38 +1851,98 @@ cardScript.textContent = 'function selectCard(card) {' +
         fromDateInput.setAttribute('min', today);
     </script>
     <script>
-
+        // Get the input element
         var fromDateInput = document.getElementById('to_date');
 
-
+        // Get today's date in the format "YYYY-MM-DD"
         var today = new Date().toISOString().split('T')[0];
 
-
+        // Set the "min" attribute of the input to today's date
         fromDateInput.setAttribute('min', today);
     </script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function getModel(id, user_id) {
+            // Set the ID in the modal when it's shown
+            $('#modalOfferId').text('ID: ' + id);
+            console.log(user_id);
+            // Make an AJAX request to fetch data from the server
+            $.ajax({
+                url: '/api/offerdetails/' + id + '/' + user_id, // Replace with your server endpoint
+                method: 'GET',
 
+                success: function(data) {
+                    console.log(data);
+                    if (Array.isArray(data) && data.length > 0) {
+                        // Access the properties of the first offer (index 0)
+                        const offer = data[0];
+                        var description = offer.visa_category + ' | ' + offer.visa_type + ' | ' + offer
+                            .entry_fees + ' | ' + offer.stay_validity + 'Days';
+                        var visaPriceText = offer.currency_name ? offer.currency_name + offer.base_rate_adult :
+                            '$' + offer.base_rate_adult;
+                        $('#visaPrice').text(visaPriceText);
+                        // Populate the table cells with data from the server
+                        $('#visaType').text(offer.visa_type);
+                        // $('#visaPrice').text(offer.currency_name + offer.base_rate_adult);
+                        $('#description').text(description);
+                        $('#TaxType').text(offer.tax_name ||
+                            'GST'); // Set a default value 'GST' if offer.tax_name is not defined or falsy
+
+                        // Assuming that offer.base_rate_adult is a string representing a numeric value
+                        var baseRateAdult = parseFloat(offer.base_rate_adult);
+
+                        // Calculate the GST amount (18% of baseRateAdult if offer.tax_percentage is not defined or falsy)
+                        var taxPercentage = offer.tax_percentage || 18;
+                        var gstAmount = (baseRateAdult * taxPercentage) / 100;
+
+                        // Calculate the total price (base rate + GST)
+                        var totalPrice = baseRateAdult + gstAmount;
+                        var currency = offer.currency_name || '$';
+
+                        // Display the base rate and GST in the #taxPrice element
+                        $('#taxPrice').text(gstAmount.toFixed(2));
+
+
+
+
+                        $('#serviceType').text('Service Fees');
+                        $('#servicePrice').text(currency + '' + offer.govt_fees_adult);
+                        $('#totalPrice').text(currency + '' + (parseFloat(gstAmount) + (parseFloat(
+                            offer
+                            .govt_fees_adult) + parseFloat(offer
+                            .base_rate_adult))));
+
+                        var modal = document.getElementById('myModal');
+                        modal.style.display = 'block';
+                    } else {
+                        console.error('No valid offer data received from the server.');
+                    }
+                },
+
+            });
+        }
+    </script>
     <!-- JavaScript code to synchronize the selected date -->
     <script>
         const dateInput = document.getElementById("from_date");
         const datePickerDropdown = document.getElementById("datePickerDropdown");
         const datePicker = document.getElementById("from_date_picker");
 
-
+        // Show the date picker when the input field is focused
         dateInput.addEventListener("focus", function() {
             datePicker.min = getTodayDate(); // Set the minimum selectable date to today
             datePickerDropdown.style.display = "block";
         });
 
-
+        // Hide the date picker when the user clicks outside of it
         document.addEventListener("click", function(event) {
             if (!datePickerDropdown.contains(event.target) && event.target !== dateInput) {
                 datePickerDropdown.style.display = "none";
             }
         });
 
-
+        // When the date picker value changes, update the text input
         datePicker.addEventListener("change", function() {
             dateInput.value = datePicker.value;
         });
@@ -1629,36 +2025,6 @@ cardScript.textContent = 'function selectCard(card) {' +
                 $('#loading-screen').css('display', 'none');
             }, 10);
 
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('#nationality, #travel_to').on('change', function() {
-                if ($('#nationality').val() !== '' && $('#travel_to').val() !== '') {
-                    // Both nationality and destination selected, show the "offers" section
-                    $('#offers-section').show();
-                } else {
-                    // At least one option is not selected, hide the "offers" section
-                    $('#offers-section').hide();
-                }
-            });
-
-            // AJAX to fetch destination cities when "destination" changes
-            $('#travel_to').on('change', function() {
-                let selectedDestination = $(this).val();
-                if (selectedDestination) {
-                    $.ajax({
-                        url: '/get-cities', // Replace with your route for fetching cities
-                        data: {
-                            destination: selectedDestination
-                        },
-                        success: function(data) {
-                            // Update the destination cities in your HTML, e.g., in a select element
-                            $('#destination-cities').html(data);
-                        }
-                    });
-                }
-            });
         });
     </script>
 </body>

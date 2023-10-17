@@ -75,7 +75,7 @@
                 <div class="col-lg-6">
 
                     <h3 class="font-weight-bold" style="padding-left: 2%;">Welcome To Visadone <h2
-                            style="padding-left: 2%;">{{ session('name') }}</h2>
+                            style="padding-left: 2%;">{{ session('email') }}</h2>
                     </h3>
                     <h6 class="font-weight-normal mb-0" style="padding-left: 2%;">All systems are running smoothly!
 

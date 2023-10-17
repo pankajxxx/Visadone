@@ -38,7 +38,7 @@
 
                 </li>
                 <li class="nav-item">
-                    @php
+                    {{-- @php
                         $hasPermission = DB::table('role_has_permissions')
                             ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
                             ->join('roles', 'role_has_permissions.role_id', '=', 'roles.id')
@@ -47,7 +47,7 @@
                             ->exists();
                     @endphp
 
-                    @if (auth()->check() && $hasPermission)
+                    @if (auth()->check() && $hasPermission) --}}
                         <a href="/visa/create" class="nav-link">
                             <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
                             <p>
@@ -55,7 +55,7 @@
 
                             </p>
                         </a>
-                    @endif
+                    {{-- @endif --}}
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link {{ request()->is('users*') || request()->is('agency*') || request()->is('agents*') || request()->is('branch*')   ? 'active' : '' }}">
