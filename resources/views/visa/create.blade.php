@@ -7,14 +7,12 @@
     <title>VisaDone</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="/public/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('/new_css/style.css') }}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap2-toggle.min.css"
-        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap2-toggle.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap2-toggle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <!-- Ionicons -->
@@ -167,6 +165,22 @@
             transition: transform 0.3s;
         }
     </style>
+    <style>
+        /* .highlighted-card {
+            border: 2px solid #00aaff;
+        } */
+
+        .checkmark::before {
+            content: '\2713';
+            color: #000;
+            position: absolute;
+            top: -5px;
+            /* border: 2px solid #fff; */
+            right: 5px;
+            border-radius: 20px;
+            font-size: 40px;
+        }
+    </style>
     <!-- <script>
         import React from 'react';
         import ReactDOM from 'react-dom';
@@ -188,9 +202,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake"
-                src="https://visadone.com/laravel_demo/testing/laravel8/public/images/visadone_logo.png"
-                alt="AdminLTELogo">
+            <img class="animation__shake" src="https://visadone.com/laravel_demo/testing/laravel8/public/images/visadone_logo.png" alt="AdminLTELogo">
         </div>
 
         <!-- Navbar -->
@@ -214,43 +226,37 @@
                                         <h3 class="card-description">Apply for a New Visa</h3>
                                         <div class="form-sample">
 
-                                                <div class="row form-group">
-                                                    <!-- Nationality Select -->
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="nationality">Nationality <span
-                                                                    class="required-field">*</span></label>
-                                                            <select class="form-control select2 custom-select"
-                                                                name="nationality" id="nationality"
-                                                                data-live-search="true" required>
-                                                                <option value="">Select Nationality</option>
-                                                                @foreach ($country as $option)
-                                                                    <option value="{{ $option->country_name }}">
-                                                                        {{ $option->country_name }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Destination Select -->
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="travel_to">Destination <span
-                                                                    class="required-field">*</span></label>
-                                                            <select class="form-control select2 custom-select"
-                                                                name="destination" id="travel_to"
-                                                                data-live-search="true" onchange="getOffer()" required>
-                                                                <option value="">Select Destination</option>
-                                                                @foreach ($country as $option)
-                                                                    <option value="{{ $option->country_name }}">
-                                                                        {{ $option->country_name }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
+                                            <div class="row form-group">
+                                                <!-- Nationality Select -->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="nationality">Nationality <span class="required-field">*</span></label>
+                                                        <select class="form-control select2 custom-select" name="nationality" id="nationality" data-live-search="true" required>
+                                                            <option value="">Select Nationality</option>
+                                                            @foreach ($country as $option)
+                                                            <option value="{{ $option->country_name }}">
+                                                                {{ $option->country_name }}
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
-                                                <!-- <button class="btn btn-primary" type="submit">Submit</button> -->
+                                                <!-- Destination Select -->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="travel_to">Destination <span class="required-field">*</span></label>
+                                                        <select class="form-control select2 custom-select" name="destination" id="travel_to" data-live-search="true" onchange="getOffer()" required>
+                                                            <option value="">Select Destination</option>
+                                                            @foreach ($country as $option)
+                                                            <option value="{{ $option->country_name }}">
+                                                                {{ $option->country_name }}
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <button class="btn btn-primary" type="submit">Submit</button> -->
 
                                         </div>
                                     </div>
@@ -271,27 +277,21 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <label class="col-sm-1.5 " id="startdate">From Date<span
-                                                                class="required-field">*</span></label>
+                                                        <label class="col-sm-1.5 " id="startdate">From Date<span class="required-field">*</span></label>
                                                         <div class="col-sm-8">
                                                             <div class="custom-date-picker">
                                                                 <!-- Single input field for both typing and date selection -->
                                                                 <div class="input-group-append">
 
 
-                                                                    <input type="text" id="from_date"
-                                                                        name="from_date" class="form-control"
-                                                                        placeholder="DD-MM-YYYY" required>
-                                                                    <span class="input-group-text"><i
-                                                                            class="fa fa-calendar"></i></span>
+                                                                    <input type="text" id="from_date" name="from_date" class="form-control" placeholder="DD-MM-YYYY" required>
+                                                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                                 </div>
                                                             </div>
 
                                                             <!-- Date picker dropdown -->
-                                                            <div class="date-picker-dropdown" id="datePickerDropdown"
-                                                                style="background-color: #f8f9fa;">
-                                                                <input type="date" id="from_date_picker"
-                                                                    name="from_date_picker">
+                                                            <div class="date-picker-dropdown" id="datePickerDropdown" style="background-color: #f8f9fa;">
+                                                                <input type="date" id="from_date_picker" name="from_date_picker">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -299,23 +299,17 @@
 
                                                 <div class="col-md-6">
                                                     <div class="form-group row ">
-                                                        <label class="col-sm-1.5 " id="enddate">To Date<span
-                                                                class="required-field">*</span></label>
+                                                        <label class="col-sm-1.5 " id="enddate">To Date<span class="required-field">*</span></label>
                                                         <div class="col-sm-8">
                                                             <div class="custom-date-picker">
                                                                 <div class="input-group-append">
                                                                     <!-- Single input field for both typing and date selection -->
-                                                                    <input type="text" id="to_date"
-                                                                        name="to_date" class="form-control"
-                                                                        placeholder="DD-MM-YYYY" required>
-                                                                    <span class="input-group-text"><i
-                                                                            class="fa fa-calendar"></i></span>
+                                                                    <input type="text" id="to_date" name="to_date" class="form-control" placeholder="DD-MM-YYYY" required>
+                                                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                                 </div>
                                                                 <!-- Date picker dropdown -->
-                                                                <div class="date-picker-dropdown"
-                                                                    id="datePickerDropdownTo">
-                                                                    <input type="date" id="to_date_picker"
-                                                                        name="to_date_picker">
+                                                                <div class="date-picker-dropdown" id="datePickerDropdownTo">
+                                                                    <input type="date" id="to_date_picker" name="to_date_picker">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -333,11 +327,9 @@
                                             <p class="card-description">Visa Types</p>
                                             <hr>
                                             <div class="custom-switch-field">
-                                                <input type="radio" id="radio-one-1" name="switch-one-1"
-                                                    value="standard visa" checked>
+                                                <input type="radio" id="radio-one-1" name="switch-one-1" value="standard visa" checked>
                                                 <label for="radio-one-1" class="custom-label">Standard Visa</label>
-                                                <input type="radio" id="radio-two-1" name="switch-one-1"
-                                                    value="express visa">
+                                                <input type="radio" id="radio-two-1" name="switch-one-1" value="express visa">
                                                 <label for="radio-two-1" class="custom-label">Express Visa</label>
                                             </div>
                                         </div>
@@ -353,11 +345,9 @@
                                             </p>
                                             <hr>
                                             <div class="custom-switch-field">
-                                                <input type="radio" id="radio-two-2" name="switch-one-2"
-                                                    value="standard visa" checked="" onchange="getOffer()">
+                                                <input type="radio" id="radio-two-2" name="switch-one-2" value="standard visa" checked="" onchange="getOffer()">
                                                 <label for="radio-two-2" class="custom-label">Single Entry</label>
-                                                <input type="radio" id="radio-two-3" name="switch-one-2"
-                                                    value="express visa" onchange="get_offer_multiple()">
+                                                <input type="radio" id="radio-two-3" name="switch-one-2" value="express visa" onchange="get_offer_multiple()">
                                                 <label for="radio-two-3" class="custom-label">Multiple Entry</label>
                                             </div>
                                         </div>
@@ -376,20 +366,17 @@
                                             </h3>
                                             <div id="currency_selection_div">
                                                 <!-- Add the buttons here -->
-                                                <select class="form-control" id="currency_code"
-                                                    style="
+                                                <select class="form-control" id="currency_code" style="
                                                 width: fit-content;
                                                 float: right;
                                                 margin-top: 2%;
-                                            "
-                                                    onchange="curreny_update()">
+                                            " onchange="curreny_update()">
                                                     <option value="">Currency</option>
                                                     @foreach ($currency as $option)
-                                                        <option name="currency_values"
-                                                            value="{{ $option->country_currency }}">
-                                                            {{ $option->country_currency }} -
-                                                            {{ $option->country_name }}
-                                                        </option>
+                                                    <option name="currency_values" value="{{ $option->country_currency }}">
+                                                        {{ $option->country_currency }} -
+                                                        {{ $option->country_name }}
+                                                    </option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -397,27 +384,23 @@
                                             <div class="tabset">
                                                 <!-- tabs -->
                                                 <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1">
-                                                    <input type="radio" name="pcss3t" checked id="tab1"
-                                                        class="tab-content-first">
+                                                    <input type="radio" name="pcss3t" checked id="tab1" class="tab-content-first">
                                                     <label for="tab1"><i class="icon-globe"></i>Tourist</label>
 
-                                                    <input type="radio" name="pcss3t" id="tab2"
-                                                        class="tab-content-2">
+                                                    <input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
                                                     <label for="tab2"><i class="icon-picture"></i>Business</label>
 
-                                                    <input type="radio" name="pcss3t" id="tab3"
-                                                        class="tab-content-3">
+                                                    <input type="radio" name="pcss3t" id="tab3" class="tab-content-3">
                                                     <label for="tab3"><i class="icon-cogs"></i>Student</label>
 
-                                                    <input type="radio" name="pcss3t" id="tab5"
-                                                        class="tab-content-last">
+                                                    <input type="radio" name="pcss3t" id="tab5" class="tab-content-last">
                                                     <label for="tab5"><i class="icon-globe"></i>Transit</label>
 
-                                                    <input type="radio" name="pcss3t" id="tab6"
-                                                        class="tab-content-last">
+                                                    <input type="radio" name="pcss3t" id="tab6" class="tab-content-last">
                                                     <label for="tab6"><i class="icon-globe"></i>Medical</label>
 
                                                     <ul>
+
                                                         <li class="tab-content tab-content-first typography">
 
 
@@ -480,18 +463,15 @@
                                                             <!-- Modal content -->
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h4 class="modal-title"
-                                                                        style="text-align: center;">Visa Offer Details
+                                                                    <h4 class="modal-title" style="text-align: center;">Visa Offer Details
                                                                     </h4>
-                                                                    <h4 class="modal-title"
-                                                                        style="text-align: center;">
+                                                                    <h4 class="modal-title" style="text-align: center;">
 
 
                                                                     </h4><br>
 
                                                                 </div><br>
-                                                                <h5 id="description"
-                                                                    style="margin-left: 4%;font-weight:700;">Package
+                                                                <h5 id="description" style="margin-left: 4%;font-weight:700;">Package
                                                                     Details</h5>
 
                                                                 <div class="modal-body">
@@ -526,8 +506,7 @@
                                                                     </table>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-default"
-                                                                        data-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -537,8 +516,7 @@
 
 
                                                     {{-- Model END --}}
-                                                    <input type="hidden" id="hidden_offer_id"
-                                                        name="offer_secrate_field" />
+                                                    <input type="hidden" id="hidden_offer_id" name="offer_secrate_field" />
 
                                                 </div>
                                             </div>
@@ -641,8 +619,7 @@
                                                         <label id="myDropzone" for="fileInput">
 
                                                             <h4>Drag and Drop Files Here</h4>
-                                                            <input type="file" name="dataFile[]"
-                                                                onchange="viewImages()" id="fileInput" multiple>
+                                                            <input type="file" name="dataFile[]" onchange="viewImages()" id="fileInput" multiple>
 
                                                             <i class="fas fa-cloud-upload-alt fa-3x"></i>
 
@@ -717,16 +694,14 @@
                     </div>
 
 
-                    <input type="submit" class="float-right btn btn-success" value="Organise Application"
-                        style="
+                    <input type="submit" class="float-right btn btn-success" value="Organise Application" style="
                     margin-right: 2%;
                     margin-bottom: 2%;
                     margin-top: 1%;
                     width: 166px;
                     height  : 50px;
                     ">
-                    <input type="submit" class="float-right btn btn-danger" value="Archive Application"
-                        style="
+                    <input type="submit" class="float-right btn btn-danger" value="Archive Application" style="
                     margin-right: 2%;
                     margin-bottom: 2%;
                     margin-top: 1%;
@@ -743,7 +718,12 @@
     </div>
     <!-- Include Flatpickr JavaScript from a CDN -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
+    <script>
+        function toggleHighlightCheckmark(card) {
+            card.classList.toggle('highlighted-card');
+            card.querySelector('.custom-radio').click(); // Trigger a click event on the radio button
+        }
+    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             flatpickr("#from_date_picker", {
@@ -765,12 +745,12 @@
         });
     </script>
     @section('scripts')
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const container = document.getElementById('datepicker-container');
-                ReactDOM.render( < Datepicker / > , container);
-            });
-        </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const container = document.getElementById('datepicker-container');
+            ReactDOM.render( < Datepicker / > , container);
+        });
+    </script>
     @show
     <script src="/js/components/datepicker.js"></script>
     <script>
@@ -975,37 +955,66 @@
 
                             // Create card content using the item properties
                             var cardContent = `
-                            <div class="card" onclick="selectCard(this)">
-                                <div class="card">
-    <div class="card-header" style="${item.visa_category === 'e-visa' ? 'background-color:#00aaff;color:white;' : 'background-color:#a77cb6;color:white;'}">
-        <!-- Add the tag here based on the type of visa -->
-        <!-- Assuming you have a property 'type' in the 'item' object indicating the visa type -->
-        <span class="visa-type-tag">${item.visa_category === 'e-visa' ? 'E-VISA' : 'Sticker Visa'}</span>
-    </div>
-    <div class="card-body" style="${item.visa_category === 'e-visa' ? 'border :1px solid #00aaff;' : 'border :1px solid #a77cb6;'}">
-        <!-- The rest of your card content here -->
-        <input type="radio" name="name="selected_offer_current" onchange="getDocuments(${item.id})" />
-        <h5 class="card-title" data-offer-id="${item.id}">Visa Price:&nbsp;$ ${item.base_rate_adult}</h5>
-<input type="hidden" name="selected_offer_id" data-offer-id="${item.id}" value="${item.id}" class="checkk" />
-
-        <input type="hidden" id="price_offer" value="${item.base_rate_adult}" />
-        <p class="card-text">Processing Time: ${item.processing_time} Working Days</p>
-        <p class="card-text">Visa Validity: ${item.visa_validity} Days (From Visa Issuance Date)</p>
-        <p class="card-text">Stay Validity: ${item.stay_validity} Days (From Arrival Date)</p><br>
-       <a href="#" class="btn" style="background-color:#00aaff;color:white;text-decoration:none;" data-toggle="modal" onclick="getModel(${item.id},{{ session('id') }})" data-target="#myModal" style="margin-top: 6px;">View Information</a>
-
+                            <div class="card" style="margin-bottom: 0px;" onclick="selectCard(this)" >
+                                <div class="card" style="margin-bottom: 0px;">
+                                <div class="card-header" style="${item.visa_category === 'e-visa' ? 'background-color:#00aaff;color:white;' : 'background-color:#a77cb6;color:white;'}">
+    <span class="visa-type-tag">
+        <span style="${item.visa_category === 'e-visa' ? 'font-weight: bold; font-size: 1.2em;' : ''}">
+            ${item.visa_category === 'e-visa' ? 'E-VISA' : 'Sticker Visa'}
+        </span>
+        ${item.visa_category === 'e-visa' ? '<i class="fa fa-credit-card" aria-hidden="true" style="font-size: 1.2em;"></i>' : '<i class="fa fa-id-card" aria-hidden="true" style="font-size: 1.2em;"></i>'}
+    </span>
+</div>
+<div class="card-body custom-card-body ${item.visa_category === 'e-visa' ? 'e-visa-border' : 'sticker-visa-border'}" style="padding: 5px;" onclick="toggleHighlightCheckmark(this); getDocuments(${item.id});">
+    <!-- The rest of your card content here -->
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <label style="display: inline-block;">
+                    <input type="radio" class="custom-radio" name="selected_offer_current" style="vertical-align: middle;" />
+                    <h4 data-offer-id="${item.id}" style="display: inline-block; margin-left: 10px;">Visa Price: $${item.base_rate_adult}</h4>
+                </label>
+                <input type="hidden" name="selected_offer_id" data-offer-id="${item.id}" value="${item.id}" class="checkk" />
+                <input type="hidden" id="price_offer" value="${item.base_rate_adult}" />
+                <p class="card-text">Processing Time: ${item.processing_time} Working Days</p>
+                <p class="card-text">Visa Validity: ${item.visa_validity} Days (From Visa Issuance Date)</p>
+                <p class="card-text">Stay Validity: ${item.stay_validity} Days (From Arrival Date)</p><br>
+                <a href="#" class="btn custom-button" data-toggle="modal" onclick="getModel(${item.id},{{ session('id') }})" data-target="#myModal">View Information</a>
+            </div>
+        </div>
     </div>
 </div>
-
-
 `;
 
                             var cardStyle = document.createElement("style");
                             cardStyle.textContent = `
+
+                            /* Custom CSS for styling radio button and card body */
+.custom-card-body {
+    border: 1px solid #a77cb6;
+}
+
+.e-visa-border {
+    border: 1px solid #00aaff;
+}
+
+.custom-radio {
+    /* Add your custom radio button styles here */
+    /* For example, you can change the appearance, colors, and size of the radio button */
+}
+
+.custom-button {
+    background-color: #00aaff;
+    color: white;
+    text-decoration: none;
+    /* Add any additional styles for your button here */
+}
+
 .card {
     margin-bottom: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
+    margin-bottom: 0rem !important;
 }
 
 .card:hover {
@@ -1035,15 +1044,15 @@
             border: 2px solid #007bff;
         }
 `;
-var cardScript = document.createElement("script");
-cardScript.textContent = 'function selectCard(card) {' +
-    'var allCards = document.querySelectorAll(".card");' +
-    'allCards.forEach(function(card) {' +
-    'card.classList.remove("selected-card");' +
-    '});' +
-    'card.classList.add("selected-card");' +
-    '}';
-    document.head.appendChild(cardScript);
+                            var cardScript = document.createElement("script");
+                            cardScript.textContent = 'function selectCard(card) {' +
+                                'var allCards = document.querySelectorAll(".card");' +
+                                'allCards.forEach(function(card) {' +
+                                'card.classList.remove("selected-card");' +
+                                '});' +
+                                'card.classList.add("selected-card");' +
+                                '}';
+                            document.head.appendChild(cardScript);
 
 
                             // Check the visa_type to decide which container to append the card
@@ -1097,9 +1106,6 @@ cardScript.textContent = 'function selectCard(card) {' +
             });
         }
     </script>
-
-
-
 
     <script>
         function get_offer_multiple() {
@@ -1167,6 +1173,7 @@ cardScript.textContent = 'function selectCard(card) {' +
         margin-bottom: 20px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         transition: 0.3s;
+        margin-bottom: 0rem !important;
     }
 
     .card:hover {
@@ -1411,8 +1418,8 @@ cardScript.textContent = 'function selectCard(card) {' +
 
                         if (response.length === 0) {
                             // Display "No Data Found" message when the response is empty
-                            $('#coupon-container_document').html('<p>No Data Found</p>');
-                            $('#coupon-container_document_1').html('<p>No Data Found</p>');
+                            $('#coupon-container_document').html('<p style="font-size: 16px; font-weight: bold; padding-left: 20px;">No Data Found</p>');
+                            $('#coupon-container_document_1').html('<p style="font-size: 16px; font-weight: bold; padding-left: 20px;">No Data Found</p>');
                             return;
                         }
 
@@ -1515,7 +1522,6 @@ cardScript.textContent = 'function selectCard(card) {' +
         fromDateInput.setAttribute('min', today);
     </script>
     <script>
-
         var fromDateInput = document.getElementById('to_date');
 
 
