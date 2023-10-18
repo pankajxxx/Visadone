@@ -10,7 +10,9 @@
     transition: all 0.5s ease;
     overflow: hidden;
  }
- 
+ [class*=sidebar-dark-] .sidebar a {
+   color: #080808d6 !important;
+ }
  #wrapper.toggled {
     padding-left: 250px;
     overflow: hidden;

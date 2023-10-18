@@ -46,6 +46,7 @@
             box-shadow: 0 0 7px 2px rgba(0, 0, 0, 0.1);
         }
 
+
         .card-description {
             font-size: 24px;
             color: #333;
@@ -111,12 +112,6 @@
             border-bottom: 2px solid #007bff;
         }
 
-        /* Custom CSS for attractive radio buttons styled as switches */
-
-        /* Custom CSS for attractive radio buttons styled as switches */
-
-        /* Custom CSS for attractive radio buttons styled as switches */
-
         .custom-switch-field {
             display: flex;
             justify-content: space-between;
@@ -164,12 +159,12 @@
             transform: translateX(-100%);
             transition: transform 0.3s;
         }
+
+        .highlighted-card {
+            border: 2px dashed #00aaff;
+        }
     </style>
     <style>
-        /* .highlighted-card {
-            border: 2px solid #00aaff;
-        } */
-
         .checkmark::before {
             content: '\2713';
             color: #000;
@@ -179,6 +174,39 @@
             right: 5px;
             border-radius: 20px;
             font-size: 40px;
+        }
+
+        /* Custom CSS for the ticket container */
+        .ticket {
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 0px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Custom CSS for the document title */
+        .custom-card-title {
+            font-size: 18px;
+            margin: 0;
+            color: #007BFF;
+        }
+
+        /* Custom CSS for the document description */
+        .custom-card-description {
+            margin: 2px 0;
+        }
+
+        /* Custom CSS for the upload button */
+        .custom-upload-button {
+            cursor: pointer;
+            text-align: center;
+        }
+
+        /* Add a hover effect for the upload button */
+        .custom-upload-button:hover {
+            background-color: #0056b3;
+            color: #fff;
         }
     </style>
     <!-- <script>
@@ -225,7 +253,6 @@
                                     <div class="card-body">
                                         <h3 class="card-description">Apply for a New Visa</h3>
                                         <div class="form-sample">
-
                                             <div class="row form-group">
                                                 <!-- Nationality Select -->
                                                 <div class="col-md-6">
@@ -536,7 +563,6 @@
                                                     <h4 class="card-description">Documents Required</h4>
                                                     <hr>
                                                 </div>
-
                                                 <div class="col-md-12 text-md-right">
                                                     <!-- Add the buttons here -->
                                                     {{-- <button class="btn" id="button_new_tab"
@@ -581,8 +607,7 @@
                                                     <h5 class="card-description">Additional Documents Required</h5>
                                                     <hr>
                                                 </div>
-                                                <div class="col-md-6 text-md-right">
-                                                    <!-- Add the buttons here -->
+                                                <!-- <div class="col-md-6 text-md-right">
                                                     {{-- <button class="btn" id="button_new_tab"
                                                         style="background-color: #039afe;color:white;">View Document
                                                         Requiredments</button>
@@ -591,7 +616,7 @@
                                                         Requirements
                                                         using Email</button> --}}
 
-                                                </div>
+                                                </div> -->
                                                 <div class="col" style="width: 100%">
                                                     <div class="row">
                                                         {{-- <div class="col-md-12"> --}}
@@ -860,12 +885,6 @@
             });
         }
     </script>
-
-
-
-
-
-
     <script>
         function curreny_update() {
             var currency = document.getElementById('currency_code');
@@ -970,10 +989,10 @@
     <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col-md-12">
-                <label style="display: inline-block;">
-                    <input type="radio" class="custom-radio" name="selected_offer_current" style="vertical-align: middle;" />
-                    <h4 data-offer-id="${item.id}" style="display: inline-block; margin-left: 10px;">Visa Price: $${item.base_rate_adult}</h4>
-                </label>
+            <label style="display: inline-block;">
+    <input type="radio" class="custom-radio" name="selected_offer_current" style="vertical-align: middle;" onclick="toggleHighlightCheckmark(this.closest('.custom-card-body'));" />
+    <h4 data-offer-id="${item.id}" style="display: inline-block; margin-left: 10px;">Visa Price: $${item.base_rate_adult}</h4>
+</label>
                 <input type="hidden" name="selected_offer_id" data-offer-id="${item.id}" value="${item.id}" class="checkk" />
                 <input type="hidden" id="price_offer" value="${item.base_rate_adult}" />
                 <p class="card-text">Processing Time: ${item.processing_time} Working Days</p>
@@ -1110,96 +1129,152 @@
     <script>
         function get_offer_multiple() {
             $(document).ready(function() {
-                var country = document.getElementById("travel_to").value;
-                // alert(type);
-                console.log(country);
-                $.ajax({
-                    url: '/offers/get/' + country + '/multi_entry',
-                    method: 'GET',
-                    success: function(response) {
-                        console.log(response);
-                        var container = $('#coupon-container');
-                        var containerBusiness = $('#coupon-container_bussiness');
-                        var containerMedical = $('#coupon-container_medical');
-                        var containerTransit = $('#coupon-container_transit');
-                        var containerStudent = $('#coupon-container_student');
+                        var country = document.getElementById("travel_to").value;
+                        // alert(type);
+                        console.log(country);
+                        $.ajax({
+                                    url: '/offers/get/' + country + '/multi_entry',
+                                    method: 'GET',
+                                    success: function(response) {
+                                            console.log(response);
+                                            var container = $('#coupon-container');
+                                            var containerBusiness = $('#coupon-container_bussiness');
+                                            var containerMedical = $('#coupon-container_medical');
+                                            var containerTransit = $('#coupon-container_transit');
+                                            var containerStudent = $('#coupon-container_student');
 
-                        // Clear previous content
-                        container.empty();
-                        containerBusiness.empty();
+                                            // Clear previous content
+                                            container.empty();
+                                            containerBusiness.empty();
 
-                        // Iterate over the data and generate HTML for each card
-                        $.each(response, function(index, item) {
-                            var customCard = $('<div>').addClass('coupon-container');
-                            var customCardBody = $('<div>').addClass('coupon');
+                                            // Iterate over the data and generate HTML for each card
+                                            $.each(response, function(index, item) {
+                                                var customCard = $('<div>').addClass('coupon-container');
+                                                var customCardBody = $('<div>').addClass('coupon');
 
-                            // Create four columns
-                            var column1 = $('<div>').addClass('col-md-4');
-                            var column2 = $('<div>').addClass('col-md-4');
-                            var column3 = $('<div>').addClass('col-md-4');
-                            var column4 = $('<div>').addClass('col-md-4');
-
-                            // Create card content using the item properties
-                            var cardContent = `
-                            <div class="ticket">
-    <div class="card">
-        <div class="card-header" style="${item.visa_category === 'e-visa' ? 'background-color:#00aaff;color:white;' : 'background-color:#a77cb6;color:white;'}">
-            <!-- Add the tag here based on the type of visa -->
-            <!-- Assuming you have a property 'type' in the 'item' object indicating the visa type -->
-            <span class="visa-type-tag">${item.visa_category === 'e-visa' ? 'E-VISA' : 'Sticker Visa'}</span>
-        </div>
-        <div class="card-body" style="${item.visa_category === 'e-visa' ? 'border :1px solid #00aaff;' : 'border :1px solid #a77cb6;'}">
-            <!-- The rest of your card content here -->
-            <input type="radio" name="selected_offer_current" onchange="getDocuments(${item.id})" />
-            <h5 class="card-title" id="offer_price" data-price="${item.base_rate_adult}">Visa Price:&nbsp;$ ${item.base_rate_adult}</h5>
-            <p class="card-text" id="offer_id" value="${item.id}" hidden>Visa Price: ${item.id}</p>
-            <input type="hidden" id="price_offer" value="${item.base_rate_adult}" />
-            <b><p class="card-text">Processing Time: ${item.processing_time} Working Days</p></b>
-            <b><p class="card-text">Visa Validity: ${item.visa_validity} Days (From Visa Issuance Date)</p></b>
-            <b><p class="card-text">Stay Validity: ${item.stay_validity} Days (From Arrival Date)</p></b><br>
-            <a href="#" class="btn" style="background-color:#00aaff;color:white;text-decoration:none;" data-toggle="modal" onclick="getModel(${item.id},{{ session('id') }})" data-target="#myModal" style="margin-top: 6px;">View Information</a>
-
+                                                // Create card content using the item properties
+                                                var cardContent = `
+    <div class="ticket">
+        <div class="card">
+            <div class="card-header ${item.visa_category === 'e-visa' ? 'bg-primary text-white' : 'bg-secondary text-white'}">
+                <span class="visa-type-tag">${item.visa_category === 'e-visa' ? 'E-VISA' : 'Sticker Visa'}</span>
+            </div>
+            <div class="card-body ${item.visa_category === 'e-visa' ? 'border-primary' : 'border-secondary'}">
+                <!-- The rest of your card content here -->
+                <input type="radio" name="selected_offer_current" onchange="getDocuments(${item.id})" />
+                <h5 class="card-title" data-offer-id="${item.id}">Visa Price: $${item.base_rate_adult}</h5>
+                <p class="card-text" id="offer_id" value="${item.id}" hidden>Visa Price: ${item.id}</p>
+                <input type="hidden" id="price_offer" value="${item.base_rate_adult}" />
+                <p class="card-text">Processing Time: ${item.processing_time} Working Days</p>
+                <p class="card-text">Visa Validity: ${item.visa_validity} Days (From Visa Issuance Date)</p>
+                <p class="card-text">Stay Validity: ${item.stay_validity} Days (From Arrival Date)</p><br>
+                <a href="#" class="btn btn-primary" data-toggle="modal" onclick="getModel(${item.id},{{ session('id') }})" data-target="#myModal">View Information</a>
+            </div>
         </div>
     </div>
-    </div>
+    `;
+
+                                                customCardBody.html(cardContent);
+                                                customCard.append(customCardBody);
+                                                var cardStyle = document.createElement("style");
+                                                cardStyle.textContent = `
+
+.custom-card-body {
+    border: 1px solid #a77cb6;
+}
+
+.e-visa-border {
+    border: 1px solid #00aaff;
+}
+
+.custom-radio {
+    /* Add your custom radio button styles here */
+    /* For example, you can change the appearance, colors, and size of the radio button */
+}
+
+.custom-button {
+    background-color: #00aaff;
+    color: white;
+    text-decoration: none;
+    /* Add any additional styles for your button here */
+}
+
+.card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    margin-bottom: 0rem !important;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    color: #555;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+.selected-card {
+            border: 2px solid #007bff;
+        }
 `;
+                                                // Append the card to the container
+                                                // Add your card to the desired container here
+                                            });
+
+                                            `;
 
 
 
 
                             var cardStyle = document.createElement("style");
                             cardStyle.textContent = `
-    .card {
-        margin-bottom: 20px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        transition: 0.3s;
-        margin-bottom: 0rem !important;
-    }
+                                            .card {
+                                                margin - bottom: 20 px;
+                                                box - shadow: 0 4 px 8 px 0 rgba(0, 0, 0, 0.2);
+                                                transition: 0.3 s;
+                                                margin - bottom: 0 rem!important;
+                                            }
 
-    .card:hover {
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    }
+                                            .card: hover {
+                                                    box - shadow: 0 8 px 16 px 0 rgba(0, 0, 0, 0.2);
+                                                }
 
-    .card-title {
-        font-weight: bold;
-        color: #333;
+                                                .card - title {
+                                                    font - weight: bold;
+                                                    color: #333;
         margin-bottom: 10px;
     }
 
     .card-text {
-        color: #555;
-    }
+        color: # 555;
+                                                }
 
-    .btn-primary {
-        background-color: #007bff;
-        border-color: #007bff;
-    }
+                                                .btn - primary {
+                                                    background - color: #007bff;
+        border-color: # 007 bff;
+                                                }
 
-    .btn-primary:hover {
-        background-color: #0069d9;
-        border-color: #0062cc;
-    }
-`;
+                                                .btn - primary: hover {
+                                                    background - color: #0069d9;
+        border-color: # 0062 cc;
+                                                }
+                                            `;
                             // Check the visa_type to decide which container to append the card
                             if (item.visa_type === 'Bussiness') {
                                 // Append to Business Visa Container
@@ -1286,16 +1361,22 @@
 
                             var cardContent = `
 
-<div class="ticket">
-<h5 class="custom-card-text"><i class="fa fa-file-text-o" aria-hidden="true"></i> &nbsp; ${item.document_name}</h5>
-<hr>
-<p class="custom-card-text" style="color:gray;">${item.document_description}</p>
-<div class="file-input">
-<label for="formFile" class="form-label"></label>
-<input type="hidden" name="documents_name[]" value ="documents_${item.document_name}" >
+                            <div class="ticket">
+    <h5 class="custom-card-title">
+        <i class="fa fa-file-text-o" aria-hidden="true"></i> &nbsp; ${item.document_name}
+    </h5>
+    <hr>
+    <p class="custom-card-description text-muted">${item.document_description}</p>
+    <div class="file-input">
+        <label for="formFile" class="form-label btn btn-primary custom-upload-button">
+            Upload Document
+            <input type="file" class="form-control" id="formFile" style="display: none;">
+        </label>
+    </div>
+</div>
 
-</div>
-</div>
+
+
 `;
 
                             // Set the card content

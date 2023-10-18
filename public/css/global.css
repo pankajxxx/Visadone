@@ -53,3 +53,6 @@ body {
   --br-10xs-9: 2.9px;
   --br-2xs: 11px;
 }
+.sidebar a {
+  color: #080808d6 !important;
+}
