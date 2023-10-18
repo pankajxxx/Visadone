@@ -61,7 +61,6 @@
                         </p>
                     </a>
                 </li>
-
                 <li class="nav-item">
                     {{-- @php
                         $hasPermission = DB::table('role_has_permissions')
