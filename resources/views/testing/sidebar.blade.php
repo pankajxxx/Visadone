@@ -1,3 +1,30 @@
+<style>
+    .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active,
+    .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+        background-color: #0b5ada;
+        color: #fff;
+    }
+
+    [class*=sidebar-dark-] .sidebar a {
+        color: #565656 !important;
+
+    }
+
+    [class*=sidebar-dark-] .sidebar a:hover {
+        color: #fff !important;
+        background-color: #0667ce !important;
+    }
+
+    /* Add your styles for the active link here */
+    .nav-link.active {
+        background-color: #0667ce;
+        /* Set your desired background color */
+        color: #fff;
+        /* Set your desired text color */
+        /* Add any other styles for the active link */
+    }
+</style>
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/" class="brand-link" style="background-color: white;color:black;">
@@ -12,8 +39,7 @@
         <!-- SidebarSearch Form -->
         <div class="form-inline">
             <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search"
-                    style="background-color: white;color:black;">
+                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search" style="background-color: white;color:black;">
                 <div class="input-group-append">
                     <button class="btn btn-sidebar" style="background-color: white;color:black;">
                         <i class="fas fa-search fa-fw"></i>
@@ -25,18 +51,17 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2" style="background-color: white;">
 
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                data-accordion="false">
-
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item menu-open">
-                    <a href="/" class="nav-link {{ request()->is('/') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
+                    <a href="/" class="nav-link  {{ request()->is('/') ? 'active' : '' }}" onclick="setActiveLink(this)">
+                        <i class="nav-icon fas fa-tachometer-alt" style="color: white;"></i>
+                        <p style="color: white;">
                             Dashboard
+                            <i class="fas fa-chevron-right" style="float: right; margin: 5px; color: white;"></i>
                         </p>
                     </a>
-
                 </li>
+
                 <li class="nav-item">
                     {{-- @php
                         $hasPermission = DB::table('role_has_permissions')
@@ -48,91 +73,90 @@
                     @endphp
 
                     @if (auth()->check() && $hasPermission) --}}
-                        <a href="/visa/create" class="nav-link">
-                            <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-                            <p>
-                                &nbsp; Apply Visa
-
-                            </p>
-                        </a>
+                    <a href="/visa/create" class="nav-link" onclick="setActiveLink(this)">
+                        <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                        <p>
+                            &nbsp; Apply Visa
+                            <i class="fas fa-chevron-right" style="float: right; margin: 5px;"></i>
+                        </p>
+                    </a>
                     {{-- @endif --}}
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link {{ request()->is('users*') || request()->is('agency*') || request()->is('agents*') || request()->is('branch*')   ? 'active' : '' }}">
-
+                    <a href="#" class="nav-link {{ request()->is('users*') || request()->is('agency*') || request()->is('agents*') || request()->is('branch*') ? 'active' : '' }}" onclick="setActiveLink(this)">
                         <i class="fa fa-users" aria-hidden="true"></i>
                         <p>
                             Authority
-                            <i class="fas fa-angle-left right"></i>
-                            {{-- <span class="badge badge-info right">6</span> --}}
+                            <i class="fas fa-chevron-right" style="float: right; margin: 5px;"></i>
                         </p>
                     </a>
+
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
+                        <li class="nav-item" onclick="setActiveLink(this)">
                             @php
-                                $hasPermission = DB::table('role_has_permissions')
-                                    ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
-                                    ->join('roles', 'role_has_permissions.role_id', '=', 'roles.id')
-                                    ->where('roles.id', auth()->user()->role)
-                                    ->where('permissions.name', 'Users list')
-                                    ->exists();
+                            $hasPermission = DB::table('role_has_permissions')
+                            ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
+                            ->join('roles', 'role_has_permissions.role_id', '=', 'roles.id')
+                            ->where('roles.id', auth()->user()->role)
+                            ->where('permissions.name', 'Users list')
+                            ->exists();
                             @endphp
 
                             @if (auth()->check() && $hasPermission)
-                                <a href="{{ route('users.index') }}" class="nav-link {{ Route::is('users.index') ? 'active' : '' }}">
-                                    <i class="fa fa-user-circle" aria-hidden="true"></i>
-                                    <p>&nbsp;&nbsp;User Management</p>
-                                </a>
+                            <a href="{{ route('users.index') }}" class="nav-link {{ Route::is('users.index') ? 'active' : '' }}">
+                                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                <p>&nbsp;&nbsp;User Management</p>
+                            </a>
                             @endif
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item" onclick="setActiveLink(this)">
                             @php
-                                $hasPermission = DB::table('role_has_permissions')
-                                    ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
-                                    ->join('roles', 'role_has_permissions.role_id', '=', 'roles.id')
-                                    ->where('roles.id', auth()->user()->role) // Assuming you have a 'role' field in the users table
-                                    ->where('permissions.name', 'Branch list')
-                                    ->exists();
+                            $hasPermission = DB::table('role_has_permissions')
+                            ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
+                            ->join('roles', 'role_has_permissions.role_id', '=', 'roles.id')
+                            ->where('roles.id', auth()->user()->role) // Assuming you have a 'role' field in the users table
+                            ->where('permissions.name', 'Branch list')
+                            ->exists();
                             @endphp
 
                             @if (auth()->check() && $hasPermission)
-                                <a href="/branch" class="nav-link">
-                                    <i class="fa fa-building-o" aria-hidden="true"></i>
-                                    <p>&nbsp;&nbsp;Branch Management</p>
-                                </a>
-                            @endif
-                        </li>
-                        <li class="nav-item">
-                            @php
-                                $hasPermission = DB::table('role_has_permissions')
-                                    ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
-                                    ->join('roles', 'role_has_permissions.role_id', '=', 'roles.id')
-                                    ->where('roles.id', auth()->user()->role) // Assuming you have a 'role' field in the users table
-                                    ->where('permissions.name', 'Agency list')
-                                    ->exists();
-                            @endphp
-                            @if (auth()->check() && $hasPermission)
-                                <a href="/agency" class="nav-link">
-                                    <i class="fa fa-bookmark-o" aria-hidden="true"></i>
-                                    <p>&nbsp;&nbsp;Agency Management</p>
-                                </a>
+                            <a href="/branch" class="nav-link">
+                                <i class="fa fa-building-o" aria-hidden="true"></i>
+                                <p>&nbsp;&nbsp;Branch Management</p>
+                            </a>
                             @endif
                         </li>
                         <li class="nav-item">
                             @php
-                                $hasPermission = DB::table('role_has_permissions')
-                                    ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
-                                    ->join('roles', 'role_has_permissions.role_id', '=', 'roles.id')
-                                    ->where('roles.id', auth()->user()->role) // Assuming you have a 'role' field in the users table
-                                    ->where('permissions.name', 'Agent list')
-                                    ->exists();
+                            $hasPermission = DB::table('role_has_permissions')
+                            ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
+                            ->join('roles', 'role_has_permissions.role_id', '=', 'roles.id')
+                            ->where('roles.id', auth()->user()->role) // Assuming you have a 'role' field in the users table
+                            ->where('permissions.name', 'Agency list')
+                            ->exists();
                             @endphp
                             @if (auth()->check() && $hasPermission)
-                                <a href="/agents" class="nav-link">
-                                    <i class="fa fa-user-secret" aria-hidden="true"></i>
-                                    <p>&nbsp;&nbsp;Agent Management</p>
-                                </a>
+                            <a href="/agency" class="nav-link">
+                                <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+                                <p>&nbsp;&nbsp;Agency Management</p>
+                            </a>
+                            @endif
+                        </li>
+                        <li class="nav-item">
+                            @php
+                            $hasPermission = DB::table('role_has_permissions')
+                            ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
+                            ->join('roles', 'role_has_permissions.role_id', '=', 'roles.id')
+                            ->where('roles.id', auth()->user()->role) // Assuming you have a 'role' field in the users table
+                            ->where('permissions.name', 'Agent list')
+                            ->exists();
+                            @endphp
+                            @if (auth()->check() && $hasPermission)
+                            <a href="/agents" class="nav-link">
+                                <i class="fa fa-user-secret" aria-hidden="true"></i>
+                                <p>&nbsp;&nbsp;Agent Management</p>
+                            </a>
                             @endif
                         </li>
                         {{-- <li class="nav-item">
@@ -155,132 +179,131 @@
 
                     </ul>
                 </li>
-                <li class="nav-item" >
+                <li class="nav-item">
                     @php
-                        $hasPermission = DB::table('role_has_permissions')
-                            ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
-                            ->join('roles', 'role_has_permissions.role_id', '=', 'roles.id')
-                            ->where('roles.id', auth()->user()->role) // Assuming you have a 'role' field in the users table
-                            ->where('permissions.name', 'Track list')
-                            ->exists();
+                    $hasPermission = DB::table('role_has_permissions')
+                    ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
+                    ->join('roles', 'role_has_permissions.role_id', '=', 'roles.id')
+                    ->where('roles.id', auth()->user()->role) // Assuming you have a 'role' field in the users table
+                    ->where('permissions.name', 'Track list')
+                    ->exists();
                     @endphp
                     @if (auth()->check() && $hasPermission)
-                        <a href="/track" class="nav-link {{ request()->is('track*') ? 'active' : '' }}">
-                            <i class="fa fa-retweet" aria-hidden="true"></i>
-                            <p>
-                                Track Applications
-
-                            </p>
-                        </a>
+                    <a href="/track" class="nav-link {{ request()->is('track*') ? 'active' : '' }}">
+                        <i class="fa fa-retweet" aria-hidden="true"></i>
+                        <p>
+                            Track Applications
+                            <i class="fas fa-chevron-right" style="float: right; margin: 5px;"></i>
+                        </p>
+                    </a>
                     @endif
                 </li>
                 <li class="nav-item">
                     @php
-                        $hasPermission = DB::table('role_has_permissions')
-                            ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
-                            ->join('roles', 'role_has_permissions.role_id', '=', 'roles.id')
-                            ->where('roles.id', auth()->user()->role) // Assuming you have a 'role' field in the users table
-                            ->where('permissions.name', 'Offers list')
-                            ->exists();
+                    $hasPermission = DB::table('role_has_permissions')
+                    ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
+                    ->join('roles', 'role_has_permissions.role_id', '=', 'roles.id')
+                    ->where('roles.id', auth()->user()->role) // Assuming you have a 'role' field in the users table
+                    ->where('permissions.name', 'Offers list')
+                    ->exists();
                     @endphp
                     @if (auth()->check() && $hasPermission)
                     <a href="/visa/offers" class="nav-link {{ request()->is('visa/offers*') ? 'active' : '' }}">
 
-                            <i class="fa fa-briefcase" aria-hidden="true"></i>
-                            <p>
-                                &nbsp;Visa Offers Config
-
-                            </p>
-                        </a>
+                        <i class="fa fa-briefcase" aria-hidden="true"></i>
+                        <p>
+                            &nbsp;Visa Offers Config
+                            <i class="fas fa-chevron-right" style="float: right; margin: 5px;"></i>
+                        </p>
+                    </a>
                     @endif
 
                 </li>
                 <li class="nav-item">
                     @php
-                        $hasPermission = DB::table('role_has_permissions')
-                            ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
-                            ->join('roles', 'role_has_permissions.role_id', '=', 'roles.id')
-                            ->where('roles.id', auth()->user()->role) // Assuming you have a 'role' field in the users table
-                            ->where('permissions.name', 'Documents list')
-                            ->exists();
+                    $hasPermission = DB::table('role_has_permissions')
+                    ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
+                    ->join('roles', 'role_has_permissions.role_id', '=', 'roles.id')
+                    ->where('roles.id', auth()->user()->role) // Assuming you have a 'role' field in the users table
+                    ->where('permissions.name', 'Documents list')
+                    ->exists();
                     @endphp
                     @if (auth()->check() && $hasPermission)
-                        <a href="/offer/rule/get" class="nav-link">
-                            <i class="fas fa-edit"></i>
-                            <p>
-                                Visa Documents Config
-
-                            </p>
-                        </a>
-                    @endif
-
-                </li>
-
-                <li class="nav-item">
-                    @php
-                        $hasPermission = DB::table('role_has_permissions')
-                            ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
-                            ->join('roles', 'role_has_permissions.role_id', '=', 'roles.id')
-                            ->where('roles.id', auth()->user()->role) // Assuming you have a 'role' field in the users table
-                            ->where('permissions.name', 'Currency list')
-                            ->exists();
-                    @endphp
-                    @if (auth()->check() && $hasPermission)
-                        <a href="/currency" class="nav-link {{ request()->is('currency*') ? 'active' : '' }}">
-                            <i class="fa fa-usd" aria-hidden="true"></i>
-                            <p>
-                                Currency Config
-
-                            </p>
-                        </a>
+                    <a href="/offer/rule/get" class="nav-link">
+                        <i class="fas fa-edit"></i>
+                        <p>
+                            Visa Documents Config
+                            <i class="fas fa-chevron-right" style="float: right; margin: 5px;"></i>
+                        </p>
+                    </a>
                     @endif
 
                 </li>
 
                 <li class="nav-item">
                     @php
-                        $hasPermission = DB::table('role_has_permissions')
-                            ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
-                            ->join('roles', 'role_has_permissions.role_id', '=', 'roles.id')
-                            ->where('roles.id', auth()->user()->role) // Assuming you have a 'role' field in the users table
-                            ->where('permissions.name', 'Track list')
-                            ->exists();
+                    $hasPermission = DB::table('role_has_permissions')
+                    ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
+                    ->join('roles', 'role_has_permissions.role_id', '=', 'roles.id')
+                    ->where('roles.id', auth()->user()->role) // Assuming you have a 'role' field in the users table
+                    ->where('permissions.name', 'Currency list')
+                    ->exists();
                     @endphp
-
                     @if (auth()->check() && $hasPermission)
-                        <a href="/tax" class="nav-link {{ request()->is('tax*') ? 'active' : '' }}">
-                            <i class="fa fa-credit-card" aria-hidden="true"></i>
-                            <p>
-                                Tax Config
-
-                            </p>
-                        </a>
+                    <a href="/currency" class="nav-link {{ request()->is('currency*') ? 'active' : '' }}">
+                        <i class="fa fa-usd" aria-hidden="true"></i>
+                        <p>
+                            Currency Config
+                            <i class="fas fa-chevron-right" style="float: right; margin: 5px;"></i>
+                        </p>
+                    </a>
                     @endif
 
                 </li>
 
                 <li class="nav-item">
                     @php
-                        $hasPermission = DB::table('role_has_permissions')
-                            ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
-                            ->join('roles', 'role_has_permissions.role_id', '=', 'roles.id')
-                            ->where('roles.id', auth()->user()->role) // Assuming you have a 'role' field in the users table
-                            ->where('permissions.name', 'User Access List')
-                            ->exists();
+                    $hasPermission = DB::table('role_has_permissions')
+                    ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
+                    ->join('roles', 'role_has_permissions.role_id', '=', 'roles.id')
+                    ->where('roles.id', auth()->user()->role) // Assuming you have a 'role' field in the users table
+                    ->where('permissions.name', 'Track list')
+                    ->exists();
                     @endphp
 
                     @if (auth()->check() && $hasPermission)
-                        <a href="/permission" class="nav-link {{ request()->is('permission*') ? 'active' : '' }}">
-                            <i class="fa fa-address-card" aria-hidden="true"></i>
-                            <p>
-                                User Access Management
-
-                            </p>
-                        </a>
+                    <a href="/tax" class="nav-link {{ request()->is('tax*') ? 'active' : '' }}">
+                        <i class="fa fa-credit-card" aria-hidden="true"></i>
+                        <p>
+                            Tax Config
+                            <i class="fas fa-chevron-right" style="float: right; margin: 5px;"></i>
+                        </p>
+                    </a>
                     @endif
 
                 </li>
 
+                <li class="nav-item">
+                    @php
+                    $hasPermission = DB::table('role_has_permissions')
+                    ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
+                    ->join('roles', 'role_has_permissions.role_id', '=', 'roles.id')
+                    ->where('roles.id', auth()->user()->role) // Assuming you have a 'role' field in the users table
+                    ->where('permissions.name', 'User Access List')
+                    ->exists();
+                    @endphp
+
+                    @if (auth()->check() && $hasPermission)
+                    <a href="/permission" class="nav-link {{ request()->is('permission*') ? 'active' : '' }}">
+                        <i class="fa fa-address-card" aria-hidden="true"></i>
+                        <p>
+                            User Access M.
+                            <i class="fas fa-chevron-right" style="float: right; margin: 5px;"></i>
+                        </p>
+                    </a>
+                    @endif
+
+                </li>
 
 
             </ul>
@@ -290,4 +313,14 @@
     </div>
     <!-- /.sidebar -->
 </aside>
+<script>
+    const dashboardLink = document.getElementById('dashboard-link');
 
+    dashboardLink.addEventListener('click', () => {
+        // Remove "active" class from all links
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => link.classList.remove('active'));
+        // Add "active" class to the clicked link
+        dashboardLink.classList.add('active');
+    });
+</script>

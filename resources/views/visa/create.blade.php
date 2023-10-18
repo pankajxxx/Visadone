@@ -37,7 +37,6 @@
     <style>
         #datePickerDropdown {
             background-color: #fff;
-            /* Set the background color to white */
         }
 
         .card {
@@ -194,7 +193,7 @@
 
         /* Custom CSS for the document description */
         .custom-card-description {
-            margin: 2px 0;
+            margin: px 0;
         }
 
         /* Custom CSS for the upload button */
